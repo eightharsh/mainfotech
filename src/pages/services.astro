@@ -9,32 +9,116 @@ const wrap = 'mx-auto w-full max-w-[80rem] px-4 sm:px-6 lg:px-8';
 
 const I = {
   pc: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="14" rx="2"/><path d="M9 21h6M12 17v4M8 7h.01M8 11h5"/></svg>',
-  repair: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.3L3 18v3h3l6.4-6.3a4 4 0 0 0 5.3-5.4l-2.6 2.6-2-2 2.6-2.6Z"/></svg>',
-  network: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 15.8a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/><path d="M2 9a15 15 0 0 1 20 0"/></svg>',
+  repair:
+    '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.3L3 18v3h3l6.4-6.3a4 4 0 0 0 5.3-5.4l-2.6 2.6-2-2 2.6-2.6Z"/></svg>',
+  network:
+    '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 15.8a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/><path d="M2 9a15 15 0 0 1 20 0"/></svg>',
   cctv: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l15-4 1 4-15 4z"/><path d="M5 11v4a2 2 0 0 0 2 2h6"/><path d="M15 15h5M17.5 15v5"/><circle cx="9" cy="8.5" r="1"/></svg>',
-  office: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V6l8-3 8 3v15M9 9h.01M15 9h.01M9 13h.01M15 13h.01M10 21v-4h4v4"/></svg>',
-  support: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 0-9 9v4a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-1v6h1a2 2 0 0 0 2-2v-4a9 9 0 0 0-9-9Z"/><path d="M16 19a3 3 0 0 1-3 2h-1"/></svg>',
+  office:
+    '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V6l8-3 8 3v15M9 9h.01M15 9h.01M9 13h.01M15 13h.01M10 21v-4h4v4"/></svg>',
+  support:
+    '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 0-9 9v4a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-1v6h1a2 2 0 0 0 2-2v-4a9 9 0 0 0-9-9Z"/><path d="M16 19a3 3 0 0 1-3 2h-1"/></svg>',
 };
 
 const services = [
-  { icon: 'pc', tile: 'tile-navy', title: 'Custom PC & Workstation Building', desc: 'Machines built for your exact workload and budget — everyday desktops to high-end gaming and creative rigs.', items: ['Gaming, editing & CAD workstations', 'Office & home desktops', 'Expert component selection'] },
-  { icon: 'repair', tile: 'tile-red', title: 'Laptop & Desktop Repair', desc: 'Quick, reliable repairs for every brand — most common faults fixed the same day.', items: ['Screen, keyboard & battery', 'Motherboard & chip-level repair', 'SSD / RAM upgrades'] },
-  { icon: 'network', tile: 'tile-cyan', title: 'Networking & Wi-Fi', desc: 'Fast, stable connectivity for homes, shops and offices — planned, cabled and configured properly.', items: ['LAN & structured cabling', 'Wi-Fi coverage & mesh', 'Routers, switches & firewalls'] },
-  { icon: 'cctv', tile: 'tile-emerald', title: 'CCTV & Security Systems', desc: 'Keep an eye on what matters with professionally installed HD surveillance you view from your phone.', items: ['HD & IP camera installation', 'DVR / NVR & storage', 'Remote mobile viewing'] },
-  { icon: 'office', tile: 'tile-purple', title: 'Office & Site IT Setup', desc: 'New shop, office or building site? We plan and deploy the complete IT and cabling backbone.', items: ['New office & shop setup', 'Cabling & power planning', 'Bulk procurement & deployment'] },
-  { icon: 'support', tile: 'tile-amber', title: 'AMC & On-Site IT Support', desc: 'Keep everything running with annual maintenance and on-call support for your team.', items: ['Annual Maintenance Contracts', 'On-site & remote support', 'OS, software & antivirus'] },
+  {
+    icon: 'pc',
+    tile: 'tile-navy',
+    title: 'Custom PC & Workstation Building',
+    desc: 'Machines built for your exact workload and budget — everyday desktops to high-end gaming and creative rigs.',
+    items: [
+      'Gaming, editing & CAD workstations',
+      'Office & home desktops',
+      'Expert component selection',
+    ],
+  },
+  {
+    icon: 'repair',
+    tile: 'tile-red',
+    title: 'Laptop & Desktop Repair',
+    desc: 'Quick, reliable repairs for every brand — most common faults fixed the same day.',
+    items: [
+      'Screen, keyboard & battery',
+      'Motherboard & chip-level repair',
+      'SSD / RAM upgrades',
+    ],
+  },
+  {
+    icon: 'network',
+    tile: 'tile-cyan',
+    title: 'Networking & Wi-Fi',
+    desc: 'Fast, stable connectivity for homes, shops and offices — planned, cabled and configured properly.',
+    items: [
+      'LAN & structured cabling',
+      'Wi-Fi coverage & mesh',
+      'Routers, switches & firewalls',
+    ],
+  },
+  {
+    icon: 'cctv',
+    tile: 'tile-emerald',
+    title: 'CCTV & Security Systems',
+    desc: 'Keep an eye on what matters with professionally installed HD surveillance you view from your phone.',
+    items: [
+      'HD & IP camera installation',
+      'DVR / NVR & storage',
+      'Remote mobile viewing',
+    ],
+  },
+  {
+    icon: 'office',
+    tile: 'tile-purple',
+    title: 'Office & Site IT Setup',
+    desc: 'New shop, office or building site? We plan and deploy the complete IT and cabling backbone.',
+    items: [
+      'New office & shop setup',
+      'Cabling & power planning',
+      'Bulk procurement & deployment',
+    ],
+  },
+  {
+    icon: 'support',
+    tile: 'tile-amber',
+    title: 'AMC & On-Site IT Support',
+    desc: 'Keep everything running with annual maintenance and on-call support for your team.',
+    items: [
+      'Annual Maintenance Contracts',
+      'On-site & remote support',
+      'OS, software & antivirus',
+    ],
+  },
 ];
 
 const process = [
-  { step: '01', title: 'Tell us the issue', desc: 'Call, WhatsApp, or visit the shop.' },
-  { step: '02', title: 'Free diagnosis', desc: 'A clear, upfront quote — no surprises.' },
-  { step: '03', title: 'Repair or install', desc: 'Genuine parts, on-site or in workshop.' },
-  { step: '04', title: 'Test & handover', desc: 'Backed by a service warranty.' },
+  {
+    step: '01',
+    title: 'Tell us the issue',
+    desc: 'Call, WhatsApp, or visit the shop.',
+  },
+  {
+    step: '02',
+    title: 'Free diagnosis',
+    desc: 'A clear, upfront quote — no surprises.',
+  },
+  {
+    step: '03',
+    title: 'Repair or install',
+    desc: 'Genuine parts, on-site or in workshop.',
+  },
+  {
+    step: '04',
+    title: 'Test & handover',
+    desc: 'Backed by a service warranty.',
+  },
 ];
 
 const reasons = [
-  '10+ years serving Mumbai', 'Genuine parts only', 'Same-day service',
-  'On-site across Mumbai', 'Free diagnosis', 'Written warranty',
+  '10+ years serving Mumbai',
+  'Genuine parts only',
+  'Same-day service',
+  'On-site across Mumbai',
+  'Free diagnosis',
+  'Written warranty',
 ];
 ---
 
@@ -42,54 +126,124 @@ const reasons = [
   title={pageTitle}
   customDescription={metaDescription}
   structuredData={{
-    '@context': 'https://schema.org', '@type': 'Service',
-    provider: { '@type': 'LocalBusiness', name: SITE.legalName, url: SITE.url, areaServed: 'Mumbai' },
-    name: 'Computer sales, repair & IT services in Mumbai', description: metaDescription,
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    provider: {
+      '@type': 'LocalBusiness',
+      name: SITE.legalName,
+      url: SITE.url,
+      areaServed: 'Mumbai',
+    },
+    name: 'Computer sales, repair & IT services in Mumbai',
+    description: metaDescription,
   }}
 >
   {/* Hero */}
   <section class="mesh-hero relative overflow-hidden">
-    <div class="grid-pattern pointer-events-none absolute inset-0" aria-hidden="true"></div>
-    <div class="brand-glow brand-glow--navy -top-20 -left-20 h-80 w-80" aria-hidden="true"></div>
-    <div class="brand-glow brand-glow--cyan top-10 -right-10 h-72 w-72" aria-hidden="true"></div>
+    <div
+      class="grid-pattern pointer-events-none absolute inset-0"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="brand-glow brand-glow--navy -top-20 -left-20 h-80 w-80"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="brand-glow brand-glow--cyan top-10 -right-10 h-72 w-72"
+      aria-hidden="true"
+    >
+    </div>
     <div class={`${wrap} relative py-16 text-center sm:py-20 lg:py-24`}>
-      <span class="eyebrow mx-auto" data-reveal><span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>Services</span>
-      <h1 class="font-display mx-auto mt-6 max-w-3xl text-4xl leading-[1.05] text-balance text-ink sm:text-5xl lg:text-6xl" data-reveal>
-        Repairs, builds & IT support <span class="text-gradient">across Mumbai</span>
+      <span class="eyebrow mx-auto" data-reveal
+        ><span class="h-1.5 w-1.5 rounded-full bg-blue-600"
+        ></span>Services</span
+      >
+      <h1
+        class="font-display text-ink mx-auto mt-6 max-w-3xl text-4xl leading-[1.05] text-balance sm:text-5xl lg:text-6xl"
+        data-reveal
+      >
+        Repairs, builds & IT support <span class="text-gradient"
+          >across Mumbai</span
+        >
       </h1>
-      <p class="mx-auto mt-6 max-w-xl text-lg text-body" data-reveal>
+      <p class="text-body mx-auto mt-6 max-w-xl text-lg" data-reveal>
         A faster PC, a fixed laptop, reliable Wi-Fi, or CCTV for your shop —
         handled end to end with genuine parts and honest pricing.
       </p>
-      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row" data-reveal>
-        <a href="/contact" class="btn-gradient inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold text-white sm:w-auto">Book a service</a>
-        <a href="/products" class="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-border bg-white px-7 text-sm font-semibold text-ink transition-colors hover:border-navy hover:bg-surface sm:w-auto">Shop products</a>
+      <div
+        class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
+        data-reveal
+      >
+        <a
+          href="/contact"
+          class="btn-gradient inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold text-white sm:w-auto"
+          >Book a service</a
+        >
+        <a
+          href="/products"
+          class="border-border text-ink hover:border-navy hover:bg-surface inline-flex min-h-12 w-full items-center justify-center rounded-full border bg-white px-7 text-sm font-semibold transition-colors sm:w-auto"
+          >Shop products</a
+        >
       </div>
     </div>
   </section>
 
   {/* Service cards */}
   <section class="relative overflow-hidden py-20 sm:py-24">
-    <div class="grid-pattern pointer-events-none absolute inset-0 opacity-60" aria-hidden="true"></div>
-    <div class="brand-glow brand-glow--navy -left-24 top-10 h-96 w-96" aria-hidden="true"></div>
-    <div class="brand-glow brand-glow--red -right-20 bottom-0 h-96 w-96" aria-hidden="true"></div>
+    <div
+      class="grid-pattern pointer-events-none absolute inset-0 opacity-60"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="brand-glow brand-glow--navy top-10 -left-24 h-96 w-96"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="brand-glow brand-glow--red -right-20 bottom-0 h-96 w-96"
+      aria-hidden="true"
+    >
+    </div>
 
     <div class={`${wrap} relative`}>
       <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {
           services.map((s, i) => (
-            <article class="card card-lift group relative overflow-hidden p-7" data-reveal data-reveal-delay={String((i % 3) * 70)}>
-              <div class="hairline-gradient absolute inset-x-0 top-0 h-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-              <span class="font-display absolute right-6 top-5 text-5xl font-bold text-ink/[0.04] transition-colors duration-300 group-hover:text-ink/[0.07]">
+            <article
+              class="card card-lift group relative overflow-hidden p-7"
+              data-reveal
+              data-reveal-delay={String((i % 3) * 70)}
+            >
+              <div class="hairline-gradient absolute inset-x-0 top-0 h-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <span class="font-display text-ink/[0.04] group-hover:text-ink/[0.07] absolute top-5 right-6 text-5xl font-bold transition-colors duration-300">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <span class:list={['icon-tile h-14 w-14 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105', s.tile]} set:html={I[s.icon as keyof typeof I]}></span>
-              <h3 class="font-display mt-6 text-lg text-ink">{s.title}</h3>
-              <p class="mt-2 text-[15px] leading-relaxed text-body">{s.desc}</p>
-              <ul class="mt-5 space-y-2.5 border-t border-border/70 pt-5">
+              <span
+                class:list={[
+                  'icon-tile h-14 w-14 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105',
+                  s.tile,
+                ]}
+                set:html={I[s.icon as keyof typeof I]}
+              />
+              <h3 class="font-display text-ink mt-6 text-lg">{s.title}</h3>
+              <p class="text-body mt-2 text-[15px] leading-relaxed">{s.desc}</p>
+              <ul class="border-border/70 mt-5 space-y-2.5 border-t pt-5">
                 {s.items.map(it => (
-                  <li class="flex items-start gap-2.5 text-sm text-body">
-                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg>
+                  <li class="text-body flex items-start gap-2.5 text-sm">
+                    <svg
+                      class="mt-0.5 h-4 w-4 shrink-0 text-emerald-500"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="m5 12 4.5 4.5L19 7" />
+                    </svg>
                     <span>{it}</span>
                   </li>
                 ))}
@@ -105,20 +259,35 @@ const reasons = [
   <section class="bg-surface-soft py-20 sm:py-24">
     <div class={`${wrap}`}>
       <div class="max-w-xl" data-reveal>
-        <span class="eyebrow"><span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>How it works</span>
-        <h2 class="font-display mt-5 text-3xl text-balance text-ink sm:text-4xl">
+        <span class="eyebrow"
+          ><span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>How it
+          works</span
+        >
+        <h2
+          class="font-display text-ink mt-5 text-3xl text-balance sm:text-4xl"
+        >
           From <span class="text-gradient">problem to fixed</span>
         </h2>
       </div>
       <div class="relative mt-12">
-        <div class="hairline-gradient absolute left-0 right-0 top-6 hidden h-0.5 lg:block" aria-hidden="true"></div>
+        <div
+          class="hairline-gradient absolute top-6 right-0 left-0 hidden h-0.5 lg:block"
+          aria-hidden="true"
+        >
+        </div>
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {
             process.map((p, i) => (
-              <div class="relative" data-reveal data-reveal-delay={String(i * 80)}>
-                <span class="bg-brand-gradient font-display relative z-10 inline-flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold text-white ring-4 ring-surface-soft">{p.step}</span>
-                <h3 class="font-display mt-5 text-base text-ink">{p.title}</h3>
-                <p class="mt-1.5 text-sm leading-relaxed text-body">{p.desc}</p>
+              <div
+                class="relative"
+                data-reveal
+                data-reveal-delay={String(i * 80)}
+              >
+                <span class="bg-brand-gradient font-display ring-surface-soft relative z-10 inline-flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold text-white ring-4">
+                  {p.step}
+                </span>
+                <h3 class="font-display text-ink mt-5 text-base">{p.title}</h3>
+                <p class="text-body mt-1.5 text-sm leading-relaxed">{p.desc}</p>
               </div>
             ))
           }
@@ -131,20 +300,42 @@ const reasons = [
   <section class={`${wrap} py-20 sm:py-24`}>
     <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
       <div data-reveal>
-        <span class="eyebrow"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Why MA Infotech</span>
-        <h2 class="font-display mt-5 text-3xl text-balance text-ink sm:text-4xl">
+        <span class="eyebrow"
+          ><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Why MA
+          Infotech</span
+        >
+        <h2
+          class="font-display text-ink mt-5 text-3xl text-balance sm:text-4xl"
+        >
           Reasons Mumbai <span class="text-gradient">keeps coming back</span>
         </h2>
-        <p class="mt-5 max-w-md text-body">Trusted, transparent service backed by genuine parts and a written warranty.</p>
+        <p class="text-body mt-5 max-w-md">
+          Trusted, transparent service backed by genuine parts and a written
+          warranty.
+        </p>
       </div>
       <div class="grid gap-3 sm:grid-cols-2">
         {
           reasons.map((r, i) => (
-            <div class="card flex items-center gap-3 p-5" data-reveal data-reveal-delay={String(i * 50)}>
+            <div
+              class="card flex items-center gap-3 p-5"
+              data-reveal
+              data-reveal-delay={String(i * 50)}
+            >
               <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg>
+                <svg
+                  class="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m5 12 4.5 4.5L19 7" />
+                </svg>
               </span>
-              <span class="text-sm font-medium text-ink">{r}</span>
+              <span class="text-ink text-sm font-medium">{r}</span>
             </div>
           ))
         }
@@ -154,28 +345,74 @@ const reasons = [
 
   {/* CTA band */}
   <section class={`${wrap} pb-20 sm:pb-24`}>
-    <div class="bg-brand-gradient relative transform-gpu overflow-hidden rounded-3xl px-6 py-12 text-center shadow-[var(--shadow-lift)] sm:px-10 sm:py-14" data-reveal>
-      <div class="grid-pattern pointer-events-none absolute inset-0 rounded-[inherit] opacity-20" aria-hidden="true"></div>
+    <div
+      class="bg-brand-gradient relative transform-gpu overflow-hidden rounded-3xl px-6 py-12 text-center shadow-[var(--shadow-lift)] sm:px-10 sm:py-14"
+      data-reveal
+    >
+      <div
+        class="grid-pattern pointer-events-none absolute inset-0 rounded-[inherit] opacity-20"
+        aria-hidden="true"
+      >
+      </div>
       <div class="relative">
-        <h2 class="font-display mx-auto max-w-2xl text-3xl text-balance text-white sm:text-4xl">
+        <h2
+          class="font-display mx-auto max-w-2xl text-3xl text-balance text-white sm:text-4xl"
+        >
           Something not working? Let's fix it today
         </h2>
         <p class="mx-auto mt-4 max-w-xl text-white/85">
           Call, WhatsApp or visit the shop — free diagnosis, genuine parts, and
           most repairs done the same day.
         </p>
-        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-7 text-sm font-semibold text-navy transition-transform hover:-translate-y-0.5 sm:w-auto">
-            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.2 1.1-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.1.1.3 0 .5l-.3.4-.3.4c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.2.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+        <div
+          class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
+        >
+          <a
+            href={CONTACT.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-navy inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-7 text-sm font-semibold transition-transform hover:-translate-y-0.5 sm:w-auto"
+          >
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+              ><path
+                d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.2 1.1-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.1.1.3 0 .5l-.3.4-.3.4c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.2.1.4.2.5.3.1.2.1.6-.1 1.1Z"
+              ></path></svg
+            >
             Book on WhatsApp
           </a>
-          <a href={`tel:${CONTACT.phoneTel}`} class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-white/40 px-7 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto">
+          <a
+            href={`tel:${CONTACT.phoneTel}`}
+            class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-white/40 px-7 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto"
+          >
             Call {CONTACT.phoneDisplay}
           </a>
         </div>
         <p class="mt-6 inline-flex items-center gap-1.5 text-sm text-white/85">
-          <svg class="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8Z"/><path fill="#fff" opacity="0.85" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24Z"/><path fill="#fff" opacity="0.7" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8l4-3.1Z"/><path fill="#fff" opacity="0.85" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-5 6.7-5Z"/></svg>
-          Rated <strong class="font-semibold text-white">{CONTACT.googleReviews.rating}/5</strong> by customers on Google
+          <svg class="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true"
+            ><path
+              fill="#fff"
+              d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8Z"
+            ></path><path
+              fill="#fff"
+              opacity="0.85"
+              d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24Z"
+            ></path><path
+              fill="#fff"
+              opacity="0.7"
+              d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8l4-3.1Z"
+            ></path><path
+              fill="#fff"
+              opacity="0.85"
+              d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-5 6.7-5Z"
+            ></path></svg
+          >
+          Rated <strong class="font-semibold text-white"
+            >{CONTACT.googleReviews.rating}/5</strong
+          > by customers on Google
         </p>
       </div>
     </div>

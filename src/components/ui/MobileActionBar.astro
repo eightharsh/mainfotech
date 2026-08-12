@@ -11,17 +11,29 @@ import { CONTACT } from '@data/constants';
   aria-label="Quick contact actions"
 >
   <div
-    class="relative border-t border-border/70 bg-white/85 backdrop-blur-xl shadow-[0_-8px_30px_-14px_rgba(15,23,42,0.35)]"
+    class="border-border/70 relative border-t bg-white/85 shadow-[0_-8px_30px_-14px_rgba(15,23,42,0.35)] backdrop-blur-xl"
   >
     <div class="mx-auto grid max-w-sm grid-cols-3 items-end">
       {/* Call */}
       <a
         href={`tel:${CONTACT.phoneTel}`}
-        class="group flex flex-col items-center gap-1 py-2.5 text-navy transition-transform active:scale-95"
+        class="group text-navy flex flex-col items-center gap-1 py-2.5 transition-transform active:scale-95"
         aria-label="Call MA Infotech"
       >
-        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <span class="text-[11px] font-semibold text-ink">Call</span>
+        <svg
+          class="h-6 w-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.9"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"
+          ></path></svg
+        >
+        <span class="text-ink text-[11px] font-semibold">Call</span>
       </a>
 
       {/* WhatsApp — raised primary action */}
@@ -35,9 +47,19 @@ import { CONTACT } from '@data/constants';
         <span
           class="-mt-8 flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_12px_26px_-8px_rgba(37,211,102,0.7)] ring-4 ring-white transition-transform duration-150 group-active:scale-90"
         >
-          <svg class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.2 1.1-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.1.1.3 0 .5l-.3.4-.3.4c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.2.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+          <svg
+            class="h-8 w-8"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            ><path
+              d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.2 1.1-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.1.1.3 0 .5l-.3.4-.3.4c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.2.1.4.2.5.3.1.2.1.6-.1 1.1Z"
+            ></path></svg
+          >
         </span>
-        <span class="mt-1 pb-2 text-[11px] font-bold text-[#128C4A]">WhatsApp</span>
+        <span class="mt-1 pb-2 text-[11px] font-bold text-[#128C4A]"
+          >WhatsApp</span
+        >
       </a>
 
       {/* Directions */}
@@ -48,8 +70,19 @@ import { CONTACT } from '@data/constants';
         class="group flex flex-col items-center gap-1 py-2.5 text-red-600 transition-transform active:scale-95"
         aria-label="Get directions"
       >
-        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span class="text-[11px] font-semibold text-ink">Directions</span>
+        <svg
+          class="h-6 w-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.9"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"
+          ></path><circle cx="12" cy="10" r="3"></circle></svg
+        >
+        <span class="text-ink text-[11px] font-semibold">Directions</span>
       </a>
     </div>
   </div>

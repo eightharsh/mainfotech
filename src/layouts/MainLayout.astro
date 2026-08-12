@@ -60,9 +60,11 @@ interface Props {
       document.documentElement.classList.add('js');
     </script>
     <ClientRouter />
-    {/* Inter — body · Sora — display headlines.
+    {
+      /* Inter — body · Sora — display headlines.
         Loaded non-render-blocking: preload as style, then swap to stylesheet on
-        load so text paints immediately (font-display:swap handles the swap). */}
+        load so text paints immediately (font-display:swap handles the swap). */
+    }
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -113,9 +115,7 @@ interface Props {
       import '@scripts/siteBootstrap.js';
     </script>
   </head>
-  <body
-    class="bg-canvas text-ink selection:bg-ink selection:text-white"
-  >
+  <body class="bg-canvas text-ink selection:bg-ink selection:text-white">
     <div id="site-scroll">
       <div id="site-scroll-content" class="relative flex min-h-dvh flex-col">
         <a

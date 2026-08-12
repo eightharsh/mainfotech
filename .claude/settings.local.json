@@ -28,7 +28,9 @@
       "Bash(awk '{print $5, $9}')",
       "Bash(file src/images/reviews/*)",
       "Bash(grep -nA3 \"footerLinks\\\\|navBarLinks\")",
-      "Bash(curl -s http://localhost:4321/robots.txt)"
+      "Bash(curl -s http://localhost:4321/robots.txt)",
+      "Bash(pnpm format:fix)",
+      "Bash(pnpm format:check)"
     ]
   }
 }

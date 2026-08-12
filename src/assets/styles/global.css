@@ -172,7 +172,8 @@
     sans-serif;
 
   /* Elevation */
-  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -18px rgba(15, 23, 42, 0.18);
+  --shadow-card:
+    0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -18px rgba(15, 23, 42, 0.18);
   --shadow-lift: 0 24px 60px -28px rgba(23, 37, 94, 0.4);
   --shadow-float: 0 18px 44px -20px rgba(23, 37, 94, 0.35);
 }
@@ -290,7 +291,11 @@ html {
   background: radial-gradient(circle, rgba(37, 99, 235, 0.28), transparent 70%);
 }
 .brand-glow--purple {
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.26), transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(124, 58, 237, 0.26),
+    transparent 70%
+  );
 }
 .brand-glow--cyan {
   background: radial-gradient(circle, rgba(6, 182, 212, 0.22), transparent 70%);
@@ -338,10 +343,26 @@ html {
 .mesh-hero {
   background-color: #fbfcff;
   background-image:
-    radial-gradient(42rem 42rem at 12% -8%, rgba(37, 99, 235, 0.16), transparent 60%),
-    radial-gradient(38rem 38rem at 92% 4%, rgba(245, 51, 79, 0.12), transparent 58%),
-    radial-gradient(46rem 46rem at 78% 96%, rgba(23, 37, 94, 0.1), transparent 60%),
-    radial-gradient(30rem 30rem at 30% 108%, rgba(6, 182, 212, 0.1), transparent 60%);
+    radial-gradient(
+      42rem 42rem at 12% -8%,
+      rgba(37, 99, 235, 0.16),
+      transparent 60%
+    ),
+    radial-gradient(
+      38rem 38rem at 92% 4%,
+      rgba(245, 51, 79, 0.12),
+      transparent 58%
+    ),
+    radial-gradient(
+      46rem 46rem at 78% 96%,
+      rgba(23, 37, 94, 0.1),
+      transparent 60%
+    ),
+    radial-gradient(
+      30rem 30rem at 30% 108%,
+      rgba(6, 182, 212, 0.1),
+      transparent 60%
+    );
 }
 
 /* Subtle blueprint grid — sits behind hero/section content */
@@ -350,8 +371,16 @@ html {
     linear-gradient(to right, rgba(23, 37, 94, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(23, 37, 94, 0.05) 1px, transparent 1px);
   background-size: 46px 46px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 78%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 78%);
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 30%,
+    #000 40%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 30%,
+    #000 40%,
+    transparent 78%
+  );
 }
 
 /* Frosted glass card */
@@ -400,13 +429,27 @@ select:required:invalid {
   color: #fff;
   box-shadow: 0 12px 26px -14px rgba(15, 23, 42, 0.5);
 }
-.tile-navy { background-image: linear-gradient(140deg, #1e3a8a, #2563eb); }
-.tile-red { background-image: linear-gradient(140deg, #e11d3c, #f5334f); }
-.tile-cyan { background-image: linear-gradient(140deg, #0891b2, #06b6d4); }
-.tile-emerald { background-image: linear-gradient(140deg, #059669, #10b981); }
-.tile-purple { background-image: linear-gradient(140deg, #6d28d9, #8b5cf6); }
-.tile-amber { background-image: linear-gradient(140deg, #ea580c, #f97316); }
-.tile-blue { background-image: linear-gradient(140deg, #1d4ed8, #3b82f6); }
+.tile-navy {
+  background-image: linear-gradient(140deg, #1e3a8a, #2563eb);
+}
+.tile-red {
+  background-image: linear-gradient(140deg, #e11d3c, #f5334f);
+}
+.tile-cyan {
+  background-image: linear-gradient(140deg, #0891b2, #06b6d4);
+}
+.tile-emerald {
+  background-image: linear-gradient(140deg, #059669, #10b981);
+}
+.tile-purple {
+  background-image: linear-gradient(140deg, #6d28d9, #8b5cf6);
+}
+.tile-amber {
+  background-image: linear-gradient(140deg, #ea580c, #f97316);
+}
+.tile-blue {
+  background-image: linear-gradient(140deg, #1d4ed8, #3b82f6);
+}
 
 /* Thin gradient hairline used to top cards / sections */
 .hairline-gradient {
@@ -431,12 +474,28 @@ select:required:invalid {
   flex-shrink: 0;
 }
 .marquee-mask {
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
 }
 @keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* Reveal-on-scroll (progressive enhancement; visible by default if JS off) */

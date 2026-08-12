@@ -10,7 +10,10 @@ async function makeIcon(size, out) {
   const pad = Math.round(size * 0.12);
   const inner = size - pad * 2;
   const fg = await sharp(logo)
-    .resize(inner, inner, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .resize(inner, inner, {
+      fit: 'contain',
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    })
     .toBuffer();
   await sharp({
     create: { width: size, height: size, channels: 4, background: WHITE },
@@ -26,7 +29,10 @@ async function makeOg(out) {
   const W = 1200;
   const H = 630;
   const fg = await sharp(logo)
-    .resize(760, 430, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .resize(760, 430, {
+      fit: 'contain',
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    })
     .toBuffer();
   await sharp({
     create: { width: W, height: H, channels: 4, background: WHITE },
