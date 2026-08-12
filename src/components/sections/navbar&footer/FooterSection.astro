@@ -238,34 +238,6 @@ const footerGridClass = isContactPage
             >
           </a>
         </div>
-
-        {/* Hours — below Reach us */}
-        <div class="border-border mt-6 border-t pt-5">
-          <p class="text-navy text-xs font-semibold tracking-[0.2em] uppercase">
-            Hours
-          </p>
-          <div class="mt-2.5 space-y-2">
-            {
-              CONTACT.hours.map(row =>
-                row.time === 'Closed' ? (
-                  <p class="text-sm">
-                    <>
-                      <span class="text-body">{row.day}</span>
-                      <span class="text-ink ml-1.5 font-semibold">
-                        — Closed
-                      </span>
-                    </>
-                  </p>
-                ) : (
-                  <p class="text-sm">
-                    <span class="text-body block">{row.day}</span>
-                    <span class="text-ink block font-semibold">{row.time}</span>
-                  </p>
-                )
-              )
-            }
-          </div>
-        </div>
       </div>
 
       {
