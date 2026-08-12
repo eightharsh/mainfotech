@@ -1,0 +1,265 @@
+---
+import { getImage } from 'astro:assets';
+import { OG, SEO, SITE } from '@data/constants';
+import faviconSrc from '@images/icon.png';
+import appIconSrc from '@images/icon.png';
+
+// Default properties for the Meta component. These values are used if props are not provided.
+// 'meta' sets a default description meta tag to describe the page content.
+// 'structuredData' defines default structured data in JSON-LD format to enhance search engine understanding of the page (for SEO purposes).
+const defaultProps = {
+  meta: SITE.description,
+  structuredData: SEO.structuredData,
+  customDescription: null,
+  customOgTitle: null,
+};
+
+// Extract props with default values assigned from defaultProps. Values can be overridden when the component is used.
+// For example:
+// <MainLayout title="Custom Title" meta="Custom description." />
+const {
+  title = SITE.title,
+  meta = defaultProps.meta,
+  customDescription = defaultProps.customDescription,
+  customOgTitle = defaultProps.customOgTitle,
+} = Astro.props;
+
+const preloadImage = Astro.props.preloadImage ?? null;
+const preloadImages = Astro.props.preloadImages ?? null;
+const providedStructuredData = Astro.props.structuredData ?? null;
+
+let structuredData = providedStructuredData ?? defaultProps.structuredData;
+
+// Prefer page-specific description; fall back to site default
+const description = customDescription || meta || SITE.description;
+// Prefer page title for OG/Twitter unless a custom share title is provided
+const ogTitle = customOgTitle || title || OG.title;
+const ogDescription = customDescription || meta || OG.description;
+
+// Define the metadata for your website and individual pages
+const siteURL = `${Astro.site}`; // Set the website URL in astro.config.mjs
+const author = SITE.author;
+const canonical = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
+  .href;
+
+const languages: { [key: string]: string } = {
+  en: '',
+};
+
+function createHref(_lang: string, prefix: string, path: string): string {
+  // Remove any existing language prefix
+  const cleanPath = path.replace(/^\/(fr|en)\//, '/');
+
+  // Add the correct language prefix if needed
+  const hrefBase = prefix ? `/${prefix}${cleanPath}` : cleanPath;
+  const normalizedBasePath = hrefBase.replace(/\/\/+/g, '/');
+
+  return `${siteURL.slice(0, -1)}${normalizedBasePath}`;
+}
+
+const fullPath: string = Astro.url.pathname;
+
+// Generate and optimize the favicon images
+const faviconPng = await getImage({
+  src: faviconSrc,
+  width: 32,
+  height: 32,
+  format: 'png',
+});
+
+const appleTouchIcon = await getImage({
+  src: appIconSrc,
+  width: 180,
+  height: 180,
+  format: 'png',
+});
+
+// News/blog posts: every article's cardImage becomes the social share preview.
+// Prefer an absolute URL string when provided (most reliable for WhatsApp / Facebook).
+const post = Astro.props.post ?? null;
+const absoluteOgImageUrl =
+  typeof Astro.props.ogImageUrl === 'string' &&
+  Astro.props.ogImageUrl.length > 0
+    ? Astro.props.ogImageUrl
+    : null;
+const articleImage =
+  absoluteOgImageUrl ||
+  Astro.props.ogImage ||
+  post?.data?.cardImage ||
+  post?.image ||
+  null;
+
+const socialImageRes =
+  absoluteOgImageUrl || typeof articleImage === 'string'
+    ? null
+    : articleImage
+      ? await getImage({
+          src: articleImage,
+          width: 1200,
+          height: 630,
+          format: 'jpg',
+          fit: 'contain',
+        })
+      : await getImage({
+          src: OG.image,
+          width: 1200,
+          height: 600,
+          format: 'jpg',
+        });
+
+const socialImage =
+  absoluteOgImageUrl ||
+  (typeof articleImage === 'string'
+    ? articleImage.startsWith('http')
+      ? articleImage
+      : new URL(articleImage, SITE.url).href
+    : new URL(socialImageRes!.src, SITE.url).href);
+
+const socialImageWidth = 1200;
+const socialImageHeight = absoluteOgImageUrl || articleImage ? 630 : 600;
+const socialImageType = 'image/jpeg';
+const socialImageAlt =
+  Astro.props.ogImageAlt ??
+  post?.data?.cardImageAlt ??
+  post?.data?.title ??
+  ogTitle;
+const ogType = post ? 'article' : OG.type;
+
+const hasArticleShareImage = Boolean(
+  absoluteOgImageUrl ||
+  Astro.props.ogImage ||
+  post?.data?.cardImage ||
+  post?.image
+);
+
+// Build Article JSON-LD only when the page did not already supply structured data
+if (post && !providedStructuredData) {
+  const postSlug = post.id?.replace(/^en\//, '') || post.slug || fullPath;
+  const postUrl = new URL(
+    postSlug.startsWith('/') ? postSlug : `/news/${postSlug}`,
+    siteURL
+  ).href;
+  structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': postUrl,
+    },
+    headline: post.data?.title || post.title || ogTitle,
+    description: post.data?.description || post.description || description,
+    image: [socialImage],
+    author: {
+      '@type': 'Organization',
+      name: post.data?.author || SITE.author || author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE.legalName || SITE.title,
+      logo: {
+        '@type': 'ImageObject',
+        url: siteURL + '/favicon.ico',
+      },
+    },
+    datePublished:
+      post.data?.pubDate?.toISOString?.() ||
+      post.pubDate ||
+      post.date ||
+      undefined,
+    dateModified: post.modified || post.updated || undefined,
+    url: postUrl,
+  };
+} else if (providedStructuredData && hasArticleShareImage) {
+  // News pages: keep page JSON-LD and set the absolute article image URL
+  structuredData = {
+    ...providedStructuredData,
+    image: socialImage,
+  };
+}
+---
+
+{
+  /*  Inject structured data into the page if provided. This data is formatted as JSON-LD, a method recommended by Google for structured data pass:
+     https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data */
+}{
+  structuredData && (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData)}
+    />
+  )
+}
+<title>{title}</title>
+{/* Define the character set, description, author, and viewport settings */}
+<meta charset="utf-8" />
+<meta content={description} name="description" />
+<meta name="web_author" content={author} />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="canonical" href={canonical} />
+{preloadImage && <link rel="preload" as="image" href={preloadImage} />}
+{
+  Array.isArray(preloadImages) &&
+    preloadImages.map(item => (
+      <link rel="preload" as="image" href={item.href} media={item.media} />
+    ))
+}
+{
+  Object.entries(languages).map(([lang, prefix]) => {
+    const cleanPath = fullPath.replace(/^\/(fr|en)\//, '/');
+    const href = createHref(lang, prefix, cleanPath);
+    return <link rel="alternate" hreflang={lang} href={href} />;
+  })
+}
+<link rel="alternate" hreflang="x-default" href={canonical} />
+
+{/* Facebook / Open Graph Meta Tags */}
+<meta property="og:locale" content={OG.locale} />
+<meta property="og:url" content={canonical} />
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:site_name" content={SITE.legalName} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:image" content={socialImage} />
+<meta property="og:image:secure_url" content={socialImage} />
+<meta property="og:image:alt" content={socialImageAlt} />
+<meta property="og:image:width" content={String(socialImageWidth)} />
+<meta property="og:image:height" content={String(socialImageHeight)} />
+<meta property="og:image:type" content={socialImageType} />
+{
+  post?.data?.pubDate && (
+    <meta
+      property="article:published_time"
+      content={post.data.pubDate.toISOString()}
+    />
+  )
+}
+
+{/* Twitter Meta Tags */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:domain" content="www.mainfotech.com" />
+<meta property="twitter:domain" content="www.mainfotech.com" />
+<meta property="twitter:url" content={canonical} />
+<meta name="twitter:title" content={ogTitle} />
+<meta name="twitter:description" content={ogDescription} />
+<meta name="twitter:image" content={socialImage} />
+<meta name="twitter:image:alt" content={socialImageAlt} />
+
+{/* Links to the webmanifest and sitemap */}
+<link rel="manifest" href="/manifest.json" />
+{/* https://docs.astro.build/en/guides/integrations-guide/sitemap/ */}
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+{/* Links for favicons */}
+<link href="/favicon.ico" rel="icon" sizes="any" type="image/x-icon" />
+<link href={faviconPng.src} rel="icon" type="image/png" sizes="32x32" />
+<meta name="mobile-web-app-capable" content="yes" />
+{/* iOS: allow Add to Home Screen to open in standalone app mode */}
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="MA Infotech" />
+<link href={appleTouchIcon.src} rel="apple-touch-icon" />
+<link href={appleTouchIcon.src} rel="shortcut icon" />
+{/* Set theme color */}
+<meta name="theme-color" content="#17255e" />

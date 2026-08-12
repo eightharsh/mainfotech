@@ -1,0 +1,187 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { Image } from 'astro:assets';
+import { SITE, CONTACT } from '@data/constants';
+import imgLaptop from '@images/products/laptop.avif';
+import imgDesktop from '@images/products/desktop.webp';
+import imgCpu from '@images/products/cpu.avif';
+import imgStorage from '@images/products/nvme.avif';
+import imgMonitor from '@images/products/monitor.webp';
+import imgPrinter from '@images/products/printer.avif';
+import imgNetwork from '@images/products/networking.avif';
+import imgCctv from '@images/products/cctv.jpg';
+import imgAccessories from '@images/products/accessories.jpg';
+
+const pageTitle = `Buy Laptops, Desktops, CCTV & PC Parts in Mumbai | ${SITE.title}`;
+const metaDescription =
+  'Buy laptops, desktops, PC components, monitors, printers, CCTV, and networking products in Mumbai. MA Infotech stocks genuine, brand-warranted IT hardware from all leading brands.';
+const wrap = 'mx-auto w-full max-w-[80rem] px-4 sm:px-6 lg:px-8';
+const waBase = 'https://wa.me/' + CONTACT.phoneTel.replace(/\D/g, '');
+const waFor = (item: string) =>
+  `${waBase}?text=${encodeURIComponent(`Hi MA Infotech! 👋 I'm interested in ${item}.`)}`;
+
+const categories = [
+  { img: imgLaptop, title: 'Laptops & Notebooks', desc: 'Business, student and gaming laptops for every budget and workload.', examples: ['Dell Inspiron', 'HP Pavilion', 'Lenovo IdeaPad', 'Asus VivoBook'] },
+  { img: imgDesktop, title: 'Desktops & All-in-Ones', desc: 'Branded towers, all-in-ones and custom-built PCs.', examples: ['Branded towers', 'Custom builds', 'All-in-Ones'] },
+  { img: imgCpu, title: 'PC Components', desc: 'Everything you need to build or upgrade a machine.', examples: ['Intel & AMD CPUs', 'Graphics cards', 'RAM', 'Motherboards'] },
+  { img: imgStorage, title: 'Storage & SSDs', desc: 'Faster boot times and more space for your data.', examples: ['NVMe SSDs', 'SATA SSDs', 'Hard drives', 'NAS'] },
+  { img: imgMonitor, title: 'Monitors & Displays', desc: 'Crisp displays for office work, design and gaming.', examples: ['24"–32"', 'IPS panels', '144Hz gaming', '4K'] },
+  { img: imgPrinter, title: 'Printers & Scanners', desc: 'Print, scan and refill — for home and office.', examples: ['Inkjet', 'Laser', 'All-in-one', 'Ink & toner'] },
+  { img: imgNetwork, title: 'Networking Equipment', desc: 'Strong, reliable Wi-Fi across every room.', examples: ['Wi-Fi routers', 'Mesh systems', 'Switches', 'Access points'] },
+  { img: imgCctv, title: 'CCTV & Surveillance', desc: 'Keep an eye on things right from your phone.', examples: ['Dome & bullet', 'IP cameras', 'DVR / NVR kits'] },
+  { img: imgAccessories, title: 'Accessories & Power', desc: 'Everyday computing essentials and backups.', examples: ['Keyboards & mice', 'UPS', 'Cables', 'Webcams'] },
+];
+
+const brands = ['Dell', 'HP', 'Lenovo', 'Asus', 'Acer', 'MSI', 'Intel', 'AMD', 'Samsung', 'Seagate', 'TP-Link', 'Hikvision'];
+
+const highlights = [
+  { title: 'Genuine & sealed', desc: 'Authentic, boxed products from authorised distributors.' },
+  { title: 'Brand warranty', desc: 'Full manufacturer warranty on everything we sell.' },
+  { title: 'Expert guidance', desc: 'We help you pick the right spec for your budget.' },
+  { title: 'Setup & delivery', desc: 'Delivery and installation across Mumbai.' },
+];
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  structuredData={{
+    '@context': 'https://schema.org', '@type': 'CollectionPage',
+    '@id': `${SITE.url}/products`, url: `${SITE.url}/products`,
+    name: pageTitle, description: metaDescription,
+    isPartOf: { '@type': 'WebSite', url: SITE.url, name: SITE.legalName },
+  }}
+>
+  {/* Hero */}
+  <section class="mesh-hero relative overflow-hidden">
+    <div class="grid-pattern pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    <div class="brand-glow brand-glow--red -top-20 -left-20 h-80 w-80" aria-hidden="true"></div>
+    <div class="brand-glow brand-glow--navy top-10 -right-10 h-72 w-72" aria-hidden="true"></div>
+    <div class={`${wrap} relative py-16 text-center sm:py-20 lg:py-24`}>
+      <span class="eyebrow mx-auto" data-reveal><span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>Products</span>
+      <h1 class="font-display mx-auto mt-6 max-w-3xl text-4xl leading-[1.05] text-balance text-ink sm:text-5xl lg:text-6xl" data-reveal>
+        Genuine IT products for <span class="text-gradient">home & business</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-xl text-lg text-body" data-reveal>
+        Laptops, desktops, components, printers, CCTV and networking gear — all
+        sealed, brand-warranted, with setup and delivery across Mumbai.
+      </p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row" data-reveal>
+        <a href="/contact" class="btn-gradient inline-flex min-h-12 w-full items-center justify-center rounded-full px-7 text-sm font-semibold text-white sm:w-auto">Ask for a price</a>
+        <a href="/services" class="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-border bg-white px-7 text-sm font-semibold text-ink transition-colors hover:border-navy hover:bg-surface sm:w-auto">See our services</a>
+      </div>
+    </div>
+    {/* Brands marquee */}
+    <div class="relative border-t border-border/70 bg-white/60 py-6 backdrop-blur-sm">
+      <div class="marquee-mask mx-auto max-w-[80rem] overflow-hidden">
+        <div class="marquee">
+          <div class="marquee-group">
+            {[...brands, ...brands].map(b => (<span class="font-display text-xl font-bold text-gray-400">{b}</span>))}
+          </div>
+          <div class="marquee-group" aria-hidden="true">
+            {[...brands, ...brands].map(b => (<span class="font-display text-xl font-bold text-gray-400">{b}</span>))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Categories */}
+  <section class={`${wrap} py-20 sm:py-24`}>
+    <div class="max-w-xl" data-reveal>
+      <span class="eyebrow"><span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>Product range</span>
+      <h2 class="font-display mt-5 text-3xl text-balance text-ink sm:text-4xl lg:text-[2.75rem]">
+        Everything you need, <span class="text-gradient">in one place</span>
+      </h2>
+    </div>
+    <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        categories.map((c, i) => (
+          <article class="card card-lift group flex flex-col overflow-hidden" data-reveal data-reveal-delay={String((i % 3) * 60)}>
+            <div class="relative aspect-[16/10] overflow-hidden bg-surface">
+              <Image
+                src={c.img}
+                alt={c.title}
+                widths={[320, 500, 720]}
+                sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 92vw"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#17255e]/90 via-[#17255e]/25 to-transparent"></div>
+              <span class="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-bold tracking-wide text-navy uppercase">In stock</span>
+              <h3 class="font-display absolute inset-x-4 bottom-3 text-lg font-bold text-white drop-shadow-md">{c.title}</h3>
+            </div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-sm leading-relaxed text-body">{c.desc}</p>
+              <div class="mt-3 flex flex-wrap gap-1.5">
+                {c.examples.map(e => (<span class="rounded-full bg-surface px-2.5 py-1 text-[11px] font-medium text-muted">{e}</span>))}
+              </div>
+              <a
+                href={waFor(c.title)}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-5 inline-flex items-center gap-2 self-start rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition-colors hover:bg-emerald-100"
+              >
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.2 1.1-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.1.1.3 0 .5l-.3.4-.3.4c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.2.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+                Enquire price
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  {/* Highlights */}
+  <section class="bg-surface-soft py-20 sm:py-24">
+    <div class={`${wrap}`}>
+      <div class="mx-auto max-w-xl text-center" data-reveal>
+        <span class="eyebrow mx-auto"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>What you can expect</span>
+        <h2 class="font-display mt-5 text-3xl text-balance text-ink sm:text-4xl">
+          Bought right, <span class="text-gradient">backed properly</span>
+        </h2>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          highlights.map((h, i) => (
+            <div class="card p-6 text-center" data-reveal data-reveal-delay={String(i * 60)}>
+              <span class="mx-auto inline-flex h-11 w-11 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg>
+              </span>
+              <h3 class="font-display mt-4 text-base text-ink">{h.title}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-body">{h.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* CTA band */}
+  <section class={`${wrap} pb-20 sm:pb-24`}>
+    <div class="bg-brand-gradient relative transform-gpu overflow-hidden rounded-3xl px-6 py-12 text-center shadow-[var(--shadow-lift)] sm:px-10 sm:py-14" data-reveal>
+      <div class="grid-pattern pointer-events-none absolute inset-0 rounded-[inherit] opacity-20" aria-hidden="true"></div>
+      <div class="relative">
+        <h2 class="font-display mx-auto max-w-2xl text-3xl text-balance text-white sm:text-4xl">
+          Found what you need? Get a price today
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-white/85">
+          Tell us the model or your budget — we'll share the best genuine option,
+          with setup and delivery across Mumbai.
+        </p>
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-7 text-sm font-semibold text-navy transition-transform hover:-translate-y-0.5 sm:w-auto">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.2 1.1-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.1.1.3 0 .5l-.3.4-.3.4c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.2.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+            Enquire on WhatsApp
+          </a>
+          <a href={`tel:${CONTACT.phoneTel}`} class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-white/40 px-7 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto">
+            Call {CONTACT.phoneDisplay}
+          </a>
+        </div>
+        <p class="mt-6 inline-flex items-center gap-1.5 text-sm text-white/85">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8Z"/><path fill="#fff" opacity="0.85" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24Z"/><path fill="#fff" opacity="0.7" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8l4-3.1Z"/><path fill="#fff" opacity="0.85" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-5 6.7-5Z"/></svg>
+          Rated <strong class="font-semibold text-white">{CONTACT.googleReviews.rating}/5</strong> by customers on Google
+        </p>
+      </div>
+    </div>
+  </section>
+</MainLayout>

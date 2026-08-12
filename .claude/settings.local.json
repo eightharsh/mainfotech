@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const {Icons}=await import\\('./src/components/ui/icons/icons.ts'\\).catch\\(\\(\\)=>\\({}\\)\\);\")",
+      "Bash(awk '/^  hammer:/{f=1} f{print} /^  },/{if\\(f\\){exit}}' src/components/ui/icons/icons.ts)",
+      "Bash(npx astro *)",
+      "Bash(pnpm --version)",
+      "Bash(pnpm install *)",
+      "Bash(pnpm exec *)",
+      "Bash(sed -i '' 's/content=\"#0039E6\"/content=\"#111111\"/' src/components/Meta.astro)",
+      "Bash(sed -i '' \"s/theme_color: '#0039E6'/theme_color: '#111111'/\" src/pages/manifest.json.ts)",
+      "Bash(sed -i '' \"s/background_color: '#F8FAFC'/background_color: '#ffffff'/\" src/pages/manifest.json.ts)",
+      "Bash(pnpm run *)",
+      "Bash(cd *)",
+      "Bash(node -)",
+      "Bash(node -e \"const sharp=require\\('sharp'\\);sharp\\('src/images/products/monitor.tiff'\\).webp\\({quality:82}\\).toFile\\('src/images/products/monitor.webp'\\).then\\(i=>console.log\\('monitor.webp',i.width+'x'+i.height,Math.round\\(require\\('fs'\\).statSync\\('src/images/products/monitor.webp'\\).size/1024\\)+'KB'\\)\\).catch\\(e=>{console.error\\(e\\);process.exit\\(1\\)}\\)\")",
+      "Bash(npm -v)",
+      "Bash(command -v nvm)",
+      "Read(//Users/eightharsh/**)",
+      "Read(//Users/eightharsh/.nvm/versions/**)",
+      "Bash(command -v brew)",
+      "Bash(brew list *)",
+      "Read(//usr/local/opt/node@24/bin/**)",
+      "Read(//opt/homebrew/opt/node@24/bin/**)",
+      "Bash(grep -iA3 \"vercel\\\\]\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/)",
+      "Bash(node -e \"const s=require\\('sharp'\\);s\\('src/images/hero.avif'\\).metadata\\(\\).then\\(m=>console.log\\(m.width+'x'+m.height, 'ratio', \\(m.width/m.height\\).toFixed\\(3\\)\\)\\)\")",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(file src/images/reviews/*)",
+      "Bash(grep -nA3 \"footerLinks\\\\|navBarLinks\")",
+      "Bash(curl -s http://localhost:4321/robots.txt)"
+    ]
+  }
+}

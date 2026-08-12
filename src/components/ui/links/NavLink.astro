@@ -1,0 +1,64 @@
+---
+// Destructure the properties from Astro.props
+const { url, name, class: className } = Astro.props;
+
+// Define TypeScript interface for the properties
+interface Props {
+  url: string;
+  name: string;
+  class?: string;
+}
+---
+
+{
+  /*
+Re-usable link component for navigation bar. Highlights the active link
+by comparing the current URL with the href of each link.
+We assign an ID matching the URL for easy reference in our script.
+If URL is '/' (home page), assign ID as 'home'
+*/
+}
+<a
+  href={url}
+  data-nav-url={url}
+  data-astro-prefetch
+  class:list={[
+    'inline-flex items-center rounded-full px-4 py-2.5 text-[15px] font-medium text-muted outline-hidden transition-colors duration-200 hover:bg-surface hover:text-ink focus-visible:outline-none lg:px-5',
+    className,
+  ]}
+>
+  {name}
+</a>
+
+<script>
+  const updateActiveNavLink = () => {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('[data-nav-url]');
+
+    navLinks.forEach(link => {
+      const href = link.getAttribute('data-nav-url');
+      if (!href) return;
+
+      const isActive =
+        href === '/'
+          ? currentPath === '/'
+          : currentPath === href || currentPath.startsWith(`${href}/`);
+
+      link.classList.remove('bg-surface', 'text-ink');
+      link.classList.add('text-muted');
+
+      if (isActive) {
+        link.classList.remove('text-muted');
+        link.classList.add('bg-surface', 'text-ink');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove('bg-surface', 'text-ink');
+        link.classList.add('text-muted');
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', updateActiveNavLink);
+  document.addEventListener('astro:page-load', updateActiveNavLink);
+</script>

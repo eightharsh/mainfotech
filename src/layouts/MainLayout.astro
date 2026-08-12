@@ -1,0 +1,199 @@
+---
+// Importing necessary components
+import Meta from '@components/Meta.astro';
+import Navbar from '@components/sections/navbar&footer/Navbar.astro';
+import FooterSection from '@components/sections/navbar&footer/FooterSection.astro';
+import MobileActionBar from '@components/ui/MobileActionBar.astro';
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
+import { ClientRouter } from 'astro:transitions';
+import { SITE } from '@data/constants';
+import '@styles/global.css';
+
+// GA4 measurement ID is provided via PUBLIC_GA_MEASUREMENT_ID env var
+const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? null;
+
+// Setting expected props
+const {
+  title = SITE.title,
+  meta,
+  structuredData,
+  post = null,
+  ogImage = null,
+  ogImageUrl = null,
+  ogImageAlt = null,
+  preloadImage = null,
+  preloadImages = null,
+  lang = 'en',
+  customDescription = null,
+  customOgTitle = null,
+  hideFooter = false,
+  fullWidth = false,
+  overlayNav = false,
+} = Astro.props;
+
+// Interface to type-check the properties
+interface Props {
+  title?: string;
+  meta?: string;
+  structuredData?: object;
+  post?: any;
+  /** Article card image metadata — used for Open Graph / Twitter share previews */
+  ogImage?: any;
+  /** Absolute https URL for share preview (preferred when available) */
+  ogImageUrl?: string | null;
+  ogImageAlt?: string | null;
+  preloadImage?: string | null;
+  preloadImages?: Array<{ href: string; media?: string }> | null;
+  lang?: string;
+  customDescription?: string | null;
+  customOgTitle?: string | null;
+  hideFooter?: boolean;
+  fullWidth?: boolean;
+  overlayNav?: boolean;
+}
+---
+
+<html lang={lang} class="scroll-pt-20 md:scroll-pt-32">
+  <head>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    <ClientRouter />
+    {/* Inter — body · Sora — display headlines.
+        Loaded non-render-blocking: preload as style, then swap to stylesheet on
+        load so text paints immediately (font-display:swap handles the swap). */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    {/* Adding metadata to the HTML document */}
+    <Meta
+      title={title}
+      meta={meta}
+      structuredData={structuredData}
+      customDescription={customDescription}
+      customOgTitle={customOgTitle}
+      post={post}
+      ogImage={ogImage}
+      ogImageUrl={ogImageUrl}
+      ogImageAlt={ogImageAlt}
+      preloadImage={preloadImage}
+      preloadImages={preloadImages}
+    />
+    {
+      /* Google Analytics 4 (optional) - inject when PUBLIC_GA_MEASUREMENT_ID is set */
+    }
+    {
+      GA_MEASUREMENT_ID && (
+        <>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          />
+          <script
+            set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${GA_MEASUREMENT_ID}');`}
+          />
+        </>
+      )
+    }
+    {/* Title is set in Meta component */}
+
+    <script>
+      import '@scripts/siteBootstrap.js';
+    </script>
+  </head>
+  <body
+    class="bg-canvas text-ink selection:bg-ink selection:text-white"
+  >
+    <div id="site-scroll">
+      <div id="site-scroll-content" class="relative flex min-h-dvh flex-col">
+        <a
+          href="#main-content"
+          class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100 focus:rounded-lg focus:bg-[#1E3AFF] focus:px-4 focus:py-2 focus:text-neutral-50"
+        >
+          Skip to content
+        </a>
+
+        <Navbar overlay={overlayNav} transition:persist="site-navbar" />
+        <main id="main-content" class="relative z-10 w-full grow">
+          <slot />
+        </main>
+        {!hideFooter && <FooterSection transition:persist />}
+        {/* Spacer so the mobile action bar never covers footer content */}
+        <div class="h-24 md:hidden" aria-hidden="true"></div>
+      </div>
+    </div>
+    <MobileActionBar />
+    <Analytics />
+    <SpeedInsights />
+    <script>
+      // https://preline.co
+      import 'preline';
+      const initPreline = () =>
+        (
+          window as Window & { HSStaticMethods?: { autoInit?: () => void } }
+        ).HSStaticMethods?.autoInit?.();
+      if (document.readyState === 'loading')
+        document.addEventListener('DOMContentLoaded', initPreline);
+      else initPreline();
+      document.addEventListener('astro:page-load', initPreline);
+    </script>
+    <style>
+      /* CSS rules for the page scrollbar */
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        ::view-transition-group(root) {
+          animation-duration: 240ms;
+          animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        ::view-transition-old(root) {
+          animation: 120ms ease-out both mi-page-out;
+        }
+
+        ::view-transition-new(root) {
+          animation: 180ms cubic-bezier(0.22, 1, 0.36, 1) both mi-page-in;
+        }
+      }
+
+      @keyframes mi-page-out {
+        from {
+          opacity: 1;
+        }
+
+        to {
+          opacity: 0;
+        }
+      }
+
+      @keyframes mi-page-in {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </body>
+</html>

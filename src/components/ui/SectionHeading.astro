@@ -1,0 +1,63 @@
+---
+// Reusable section heading: optional eyebrow + display title + supporting text.
+const {
+  eyebrow,
+  title,
+  subtitle,
+  align = 'left',
+  accent = 'blue',
+  class: className,
+} = Astro.props;
+
+interface Props {
+  eyebrow?: string;
+  /** Plain text or HTML — wrap words in <span class="text-gradient"> to highlight. */
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+  accent?: 'blue' | 'purple' | 'cyan' | 'emerald' | 'amber' | 'red';
+  class?: string;
+}
+
+const eyebrowColors = {
+  blue: 'text-blue-600',
+  purple: 'text-purple-600',
+  cyan: 'text-cyan-600',
+  emerald: 'text-emerald-600',
+  amber: 'text-amber-600',
+  red: 'text-red-600',
+};
+const eyebrowColor = eyebrowColors[accent] ?? eyebrowColors.blue;
+
+const alignClasses =
+  align === 'center' ? 'mx-auto max-w-2xl text-center' : 'max-w-2xl';
+---
+
+<div class:list={[alignClasses, className]}>
+  {
+    eyebrow && (
+      <p
+        class:list={[
+          'text-xs font-semibold tracking-[0.16em] uppercase',
+          eyebrowColor,
+        ]}
+      >
+        {eyebrow}
+      </p>
+    )
+  }
+  <h2
+    class="font-display mt-3 text-3xl leading-[1.1] text-balance text-ink sm:text-4xl md:text-[2.75rem]"
+    set:html={title}
+  />
+  {
+    /* title accepts HTML so pages can highlight words with .text-gradient */
+  }
+  {
+    subtitle && (
+      <p class="mt-4 text-base leading-relaxed text-body sm:text-lg">
+        {subtitle}
+      </p>
+    )
+  }
+</div>

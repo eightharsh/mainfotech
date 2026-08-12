@@ -1,0 +1,76 @@
+---
+import { getMarketingLocale } from '@utils/locale';
+import {
+  countryPhoneCodes,
+  type CountryPhoneCode,
+} from '../../../../data_files/countryPhoneCodes';
+
+const locale = getMarketingLocale(Astro.url.pathname, Astro.currentLocale);
+
+const {
+  label = locale === 'fr' ? 'Numéro de téléphone' : 'Phone Number',
+  countryLabel = locale === 'fr' ? 'Indicatif pays' : 'Country Code',
+  id,
+  countryId = `${id}-country-code`,
+  defaultCountryCode = 'IN',
+  minDigits,
+  maxDigits,
+  required = false,
+} = Astro.props;
+
+interface Props {
+  label?: string;
+  countryLabel?: string;
+  id: string;
+  countryId?: string;
+  defaultCountryCode?: string;
+  minDigits?: number;
+  maxDigits?: number;
+  required?: boolean;
+}
+
+const selectedCountry = countryPhoneCodes.find(
+  (country: CountryPhoneCode) => country.code === defaultCountryCode
+);
+---
+
+<div
+  class="grid grid-cols-1 gap-4 sm:grid-cols-[minmax(0,180px)_minmax(0,1fr)]"
+>
+  <div>
+    <label for={countryId} class="sr-only">{countryLabel}</label>
+    <select
+      name="phoneCountryCode"
+      id={countryId}
+      class="block min-h-11 w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 focus:border-ink focus:ring-3 focus:ring-neutral-200 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 sm:text-sm dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1"
+      autocomplete="tel-country-code"
+    >
+      {
+        countryPhoneCodes.map((country: CountryPhoneCode) => (
+          <option
+            value={country.dialCode}
+            selected={country.code === (selectedCountry?.code || 'IN')}
+          >
+            {country.name} ({country.dialCode})
+          </option>
+        ))
+      }
+    </select>
+  </div>
+  <div>
+    <label for={id} class="sr-only">{label}</label>
+    <input
+      type="tel"
+      name="phone"
+      id={id}
+      inputmode="numeric"
+      autocomplete="tel-national"
+      required={required}
+      maxlength={maxDigits}
+      data-phone-min-digits={minDigits}
+      data-phone-max-digits={maxDigits}
+      class="block min-h-11 w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-ink focus:ring-3 focus:ring-neutral-200 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 sm:text-sm dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1"
+      placeholder={label}
+    />
+  </div>
+</div>

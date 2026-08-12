@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import logo from '@images/mainfotech.png';
+
+const { class: className = 'h-14 w-auto object-contain', ...rest } =
+  Astro.props;
+---
+
+<Image
+  src={logo}
+  alt="MA Infotech"
+  class={className}
+  widths={[160, 240, 320]}
+  sizes="240px"
+  loading="eager"
+  decoding="async"
+  format="webp"
+  {...rest}
+/>

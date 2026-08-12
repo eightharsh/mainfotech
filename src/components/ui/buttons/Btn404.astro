@@ -1,0 +1,29 @@
+---
+import Icon from '@components/ui/icons/Icon.astro';
+// Destructure the properties from Astro.props
+const { title, id, noArrow } = Astro.props;
+// Define TypeScript interface for the properties
+interface Props {
+  title?: string;
+  id?: string;
+  noArrow?: boolean;
+}
+// Define CSS classes for styling the button
+const baseClasses =
+  'group inline-flex items-center justify-center gap-x-2 rounded-xl px-4 py-3 text-sm font-bold text-white ring-zinc-500 transition duration-300 focus-visible:ring-3 outline-hidden';
+const borderClasses = 'border border-transparent';
+const bgColorClasses = 'bg-[#10245F] hover:bg-[#0C1B48] active:bg-[#091337]';
+const disableClasses = 'disabled:pointer-events-none disabled:opacity-50';
+const fontSizeClasses = '2xl:text-base';
+const ringClasses = '';
+---
+
+{/* Button with dynamic title, id, and optional arrow */}
+<button
+  class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${disableClasses} ${fontSizeClasses} ${ringClasses}`}
+  id={id}
+>
+  {title}
+  {/* Display the arrow based on the 'noArrow' property */}
+  {noArrow ? null : <Icon name="arrowRight" />}
+</button>
