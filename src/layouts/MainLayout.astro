@@ -4,6 +4,7 @@ import Meta from '@components/Meta.astro';
 import Navbar from '@components/sections/navbar&footer/Navbar.astro';
 import FooterSection from '@components/sections/navbar&footer/FooterSection.astro';
 import MobileActionBar from '@components/ui/MobileActionBar.astro';
+import BrandLogo from '@components/BrandLogo.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import { ClientRouter } from 'astro:transitions';
@@ -58,6 +59,21 @@ interface Props {
   <head>
     <script is:inline>
       document.documentElement.classList.add('js');
+      // Detect installed-app (standalone) launch so we can show a branded splash
+      // on cold start only — never in the browser, so website LCP is unaffected.
+      (function () {
+        try {
+          var standalone =
+            window.matchMedia('(display-mode: standalone)').matches ||
+            window.navigator.standalone === true;
+          if (standalone) {
+            document.documentElement.classList.add('pwa-standalone');
+            if (!sessionStorage.getItem('maSplashShown')) {
+              document.documentElement.classList.add('show-splash');
+            }
+          }
+        } catch (e) {}
+      })();
     </script>
     <ClientRouter />
     {
@@ -116,6 +132,15 @@ interface Props {
     </script>
   </head>
   <body class="bg-canvas text-ink selection:bg-ink selection:text-white">
+    {
+      /* Branded launch splash — visible only in installed-app (standalone) mode */
+    }
+    <div id="app-splash" aria-hidden="true">
+      <div class="app-splash__inner">
+        <BrandLogo class="app-splash__logo h-14 w-auto" />
+        <span class="app-splash__bar"></span>
+      </div>
+    </div>
     <div id="site-scroll">
       <div id="site-scroll-content" class="relative flex min-h-dvh flex-col">
         <a
@@ -135,6 +160,29 @@ interface Props {
       </div>
     </div>
     <MobileActionBar />
+    {/* Fade out the launch splash once the app is ready (standalone only) */}
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        if (!root.classList.contains('show-splash')) return;
+        var hide = function () {
+          var s = document.getElementById('app-splash');
+          root.classList.remove('show-splash');
+          try {
+            sessionStorage.setItem('maSplashShown', '1');
+          } catch (e) {}
+          if (!s) return;
+          setTimeout(function () {
+            s.classList.add('is-hidden');
+            setTimeout(function () {
+              if (s && s.parentNode) s.parentNode.removeChild(s);
+            }, 500);
+          }, 300);
+        };
+        if (document.readyState === 'complete') hide();
+        else window.addEventListener('load', hide);
+      })();
+    </script>
     <Analytics />
     <SpeedInsights />
     <script>
