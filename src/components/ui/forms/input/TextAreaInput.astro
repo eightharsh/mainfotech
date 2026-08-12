@@ -1,0 +1,46 @@
+---
+const {
+  label,
+  id,
+  name,
+  rows = 4,
+  maxlength,
+  showCharCount = false,
+  class: className,
+} = Astro.props;
+
+interface Props {
+  label: string;
+  name: string;
+  id: string;
+  rows?: number;
+  maxlength?: number;
+  showCharCount?: boolean;
+  class?: string;
+}
+---
+
+<div>
+  <label for={id} class="sr-only">{label}</label>
+  <textarea
+    id={id}
+    name={name}
+    rows={rows}
+    maxlength={maxlength}
+    required
+    data-char-count-for={showCharCount && maxlength
+      ? `${id}-char-count`
+      : undefined}
+    class:list={[
+      'block w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-ink focus:ring-3 focus:ring-neutral-200 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 sm:text-sm dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1',
+      className,
+    ]}
+    placeholder={label}></textarea>
+  {
+    showCharCount && maxlength ? (
+      <p class="mt-1 text-right text-xs text-[#4A5F8C]" aria-live="polite">
+        <span id={`${id}-char-count`}>0</span>/{maxlength} characters
+      </p>
+    ) : null
+  }
+</div>

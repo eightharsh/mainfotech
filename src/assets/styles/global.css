@@ -1,0 +1,515 @@
+@import 'tailwindcss';
+
+/* Preline UI */
+@source '../../../node_modules/preline/dist/*.js';
+@import '../../../node_modules/preline/variants.css';
+
+/* Plugins */
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* https://tailwindcss.com/docs/colors#customizing-your-colors */
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-black: #000;
+  --color-white: #fff;
+
+  --color-gray-50: oklch(0.985 0.002 247.839);
+  --color-gray-100: oklch(0.967 0.003 264.542);
+  --color-gray-200: oklch(0.928 0.006 264.531);
+  --color-gray-300: oklch(0.872 0.01 258.338);
+  --color-gray-400: oklch(0.707 0.022 261.325);
+  --color-gray-500: oklch(0.551 0.027 264.364);
+  --color-gray-600: oklch(0.446 0.03 256.802);
+  --color-gray-700: oklch(0.373 0.034 259.733);
+  --color-gray-800: oklch(0.278 0.033 256.848);
+  --color-gray-900: oklch(0.21 0.034 264.665);
+  --color-gray-950: oklch(0.13 0.028 261.692);
+
+  --color-indigo-50: oklch(0.962 0.018 272.314);
+  --color-indigo-100: oklch(0.93 0.034 272.788);
+  --color-indigo-200: oklch(0.87 0.065 274.039);
+  --color-indigo-300: oklch(0.785 0.115 274.713);
+  --color-indigo-400: oklch(0.673 0.182 276.935);
+  --color-indigo-500: oklch(0.585 0.233 277.117);
+  --color-indigo-600: oklch(0.511 0.262 276.966);
+  --color-indigo-700: oklch(0.457 0.24 277.023);
+  --color-indigo-800: oklch(0.398 0.195 277.366);
+  --color-indigo-900: oklch(0.359 0.144 278.697);
+  --color-indigo-950: oklch(0.257 0.09 281.288);
+
+  --color-neutral-50: oklch(0.985 0 0);
+  --color-neutral-100: oklch(0.97 0 0);
+  --color-neutral-200: oklch(0.922 0 0);
+  --color-neutral-300: oklch(0.87 0 0);
+  --color-neutral-400: oklch(0.708 0 0);
+  --color-neutral-500: oklch(0.556 0 0);
+  --color-neutral-600: oklch(0.439 0 0);
+  --color-neutral-700: oklch(0.371 0 0);
+  --color-neutral-800: oklch(0.269 0 0);
+  --color-neutral-900: oklch(0.205 0 0);
+  --color-neutral-950: oklch(0.145 0 0);
+
+  /* True yellow/orange scales. (Previously remapped to blue, which made any
+     yellow/orange utility silently render blue — a maintenance trap.) */
+  --color-yellow-50: #fefce8;
+  --color-yellow-100: #fef9c3;
+  --color-yellow-200: #fef08a;
+  --color-yellow-300: #fde047;
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
+  --color-yellow-700: #a16207;
+  --color-yellow-800: #854d0e;
+  --color-yellow-900: #713f12;
+  --color-yellow-950: #422006;
+
+  --color-orange-50: #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+  --color-orange-800: #9a3412;
+  --color-orange-900: #7c2d12;
+  --color-orange-950: #431407;
+
+  /* Brand red — matched to the MA Infotech logo dot (#f5334f) */
+  --color-red-50: #fff1f3;
+  --color-red-100: #ffe0e5;
+  --color-red-200: #ffc7cf;
+  --color-red-300: #ff9aa8;
+  --color-red-400: #fb607a;
+  --color-red-500: #f5334f;
+  --color-red-600: #e11d3c;
+  --color-red-700: #be1533;
+  --color-red-800: #9d152f;
+  --color-red-900: #82162c;
+  --color-red-950: #480712;
+
+  --color-zinc-50: oklch(0.985 0 0);
+  --color-zinc-100: oklch(0.967 0.001 286.375);
+  --color-zinc-200: oklch(0.92 0.004 286.32);
+  --color-zinc-300: oklch(0.871 0.006 286.286);
+  --color-zinc-400: oklch(0.705 0.015 286.067);
+  --color-zinc-500: oklch(0.552 0.016 285.938);
+  --color-zinc-600: oklch(0.442 0.017 285.786);
+  --color-zinc-700: oklch(0.37 0.013 285.805);
+  --color-zinc-800: oklch(0.274 0.006 286.033);
+  --color-zinc-900: oklch(0.21 0.006 285.885);
+  --color-zinc-950: oklch(0.141 0.005 285.823);
+
+  /* ── Accent color scales (AI_GUIDE colorful direction) ──────────────── */
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+
+  --color-purple-50: #f5f3ff;
+  --color-purple-100: #ede9fe;
+  --color-purple-200: #ddd6fe;
+  --color-purple-300: #c4b5fd;
+  --color-purple-500: #8b5cf6;
+  --color-purple-600: #7c3aed;
+  --color-purple-700: #6d28d9;
+
+  --color-cyan-50: #ecfeff;
+  --color-cyan-100: #cffafe;
+  --color-cyan-200: #a5f3fc;
+  --color-cyan-300: #67e8f9;
+  --color-cyan-500: #06b6d4;
+  --color-cyan-600: #0891b2;
+  --color-cyan-700: #0e7490;
+
+  --color-emerald-50: #ecfdf5;
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+
+  --color-amber-50: #fff7ed;
+  --color-amber-100: #ffedd5;
+  --color-amber-200: #fed7aa;
+  --color-amber-300: #fdba74;
+  --color-amber-500: #f97316;
+  --color-amber-600: #ea580c;
+  --color-amber-700: #c2410c;
+
+  /* ── Brand design tokens ────────────────────────────────────────────── */
+  --color-canvas: #ffffff;
+  --color-ink: #0f172a;
+  --color-navy: #17255e;
+  --color-primary: #2563eb;
+  --color-primary-active: #1d4ed8;
+  --color-brand-red: #f5334f;
+  --color-body: #374151;
+  --color-muted: #6b7280;
+  --color-muted-soft: #898989;
+  --color-border: #e5e7eb;
+  --color-border-soft: #f3f4f6;
+  --color-surface: #f5f5f5;
+  --color-surface-soft: #f8f9fa;
+  --color-dark: #101010;
+  --color-dark-elevated: #1a1a1a;
+  --color-on-dark-soft: #a1a1aa;
+
+  /* Typography */
+  --font-sans:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display:
+    'Sora', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif;
+
+  /* Elevation */
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -18px rgba(15, 23, 42, 0.18);
+  --shadow-lift: 0 24px 60px -28px rgba(23, 37, 94, 0.4);
+  --shadow-float: 0 18px 44px -20px rgba(23, 37, 94, 0.35);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Document scroll keeps trackpad back/forward gestures working.
+   Page canvas color softens rubber-band flash without blocking pull-to-refresh. */
+html,
+body {
+  background-color: #ffffff;
+  font-family: var(--font-sans);
+}
+
+/* ── Fluid base type scale ────────────────────────────────────────────────
+   The whole UI is sized in rem (Tailwind v4 default), so scaling the root
+   font-size fluidly makes type, spacing and components grow/shrink smoothly
+   with the viewport instead of jumping only at breakpoints. Anchored near
+   16px on desktop to preserve the tuned layout: ≈15px on phones → ≈17px on
+   large screens. Layout breakpoints stay px-based, so columns still reflow. */
+html {
+  font-size: clamp(15px, 14.5px + 0.13vw, 17px);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Display headline treatment */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* ── Colorful accent system (AI_GUIDE) ───────────────────────────────── */
+
+/* Gradient-highlighted words inside near-black headlines (navy → royal blue) */
+.text-gradient {
+  background-image: linear-gradient(100deg, #17255e 0%, #2563eb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Rich brand gradient surface for CTA bands and decorative panels */
+.bg-brand-gradient {
+  background-image: linear-gradient(
+    135deg,
+    #17255e 0%,
+    #1e40af 52%,
+    #2563eb 100%
+  );
+}
+
+/* Primary gradient button */
+.btn-gradient {
+  background-image: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  box-shadow: 0 8px 24px -12px rgba(23, 37, 94, 0.55);
+  transition:
+    box-shadow 0.2s ease,
+    filter 0.2s ease,
+    transform 0.2s ease;
+}
+.btn-gradient:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 12px 30px -10px rgba(37, 99, 235, 0.7);
+}
+.btn-gradient:active {
+  filter: brightness(0.97);
+}
+
+/* Soft decorative gradient glow — sits behind hero/section content */
+.brand-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  pointer-events: none;
+  z-index: 0;
+}
+.brand-glow--blue {
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.28), transparent 70%);
+}
+.brand-glow--purple {
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.26), transparent 70%);
+}
+.brand-glow--cyan {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.22), transparent 70%);
+}
+.brand-glow--red {
+  background: radial-gradient(circle, rgba(245, 51, 79, 0.18), transparent 70%);
+}
+.brand-glow--navy {
+  background: radial-gradient(circle, rgba(23, 37, 94, 0.22), transparent 70%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Only the hero glows float; glows in other sections/footer stay static to
+     keep always-on background motion to a minimum. */
+  .mesh-hero .brand-glow {
+    animation: brand-glow-float 14s ease-in-out infinite alternate;
+  }
+}
+@keyframes brand-glow-float {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(0, -12px, 0) scale(1.06);
+  }
+}
+
+#site-scroll-content {
+  min-height: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MA Infotech — visual design system (colorful / premium per AI_GUIDE)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Secondary gradient-text (navy → red) for select highlights */
+.text-gradient-red {
+  background-image: linear-gradient(100deg, #17255e 0%, #e11d3c 120%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Rich hero mesh: layered soft radial color blooms on a light base */
+.mesh-hero {
+  background-color: #fbfcff;
+  background-image:
+    radial-gradient(42rem 42rem at 12% -8%, rgba(37, 99, 235, 0.16), transparent 60%),
+    radial-gradient(38rem 38rem at 92% 4%, rgba(245, 51, 79, 0.12), transparent 58%),
+    radial-gradient(46rem 46rem at 78% 96%, rgba(23, 37, 94, 0.1), transparent 60%),
+    radial-gradient(30rem 30rem at 30% 108%, rgba(6, 182, 212, 0.1), transparent 60%);
+}
+
+/* Subtle blueprint grid — sits behind hero/section content */
+.grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(23, 37, 94, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 37, 94, 0.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 78%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 78%);
+}
+
+/* Frosted glass card */
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow-float);
+}
+
+/* Card hover lift */
+.card {
+  background: var(--color-canvas);
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
+  }
+}
+/* Keyboard focus ring for interactive cards (links/buttons using .card) */
+.card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Muted placeholder for a required <select> until a real option is chosen */
+select:required:invalid {
+  color: var(--color-muted);
+}
+
+/* Gradient icon tiles (colored, per AI_GUIDE controlled-accent strategy) */
+.icon-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  color: #fff;
+  box-shadow: 0 12px 26px -14px rgba(15, 23, 42, 0.5);
+}
+.tile-navy { background-image: linear-gradient(140deg, #1e3a8a, #2563eb); }
+.tile-red { background-image: linear-gradient(140deg, #e11d3c, #f5334f); }
+.tile-cyan { background-image: linear-gradient(140deg, #0891b2, #06b6d4); }
+.tile-emerald { background-image: linear-gradient(140deg, #059669, #10b981); }
+.tile-purple { background-image: linear-gradient(140deg, #6d28d9, #8b5cf6); }
+.tile-amber { background-image: linear-gradient(140deg, #ea580c, #f97316); }
+.tile-blue { background-image: linear-gradient(140deg, #1d4ed8, #3b82f6); }
+
+/* Thin gradient hairline used to top cards / sections */
+.hairline-gradient {
+  background-image: linear-gradient(90deg, #17255e, #2563eb, #f5334f);
+}
+
+/* Brands marquee — two identical groups translated by exactly one group width,
+   so the loop is perfectly seamless (no trailing-margin rounding gap). */
+.marquee {
+  display: flex;
+  width: max-content;
+  flex-wrap: nowrap;
+  animation: marquee-scroll 32s linear infinite;
+}
+.marquee-group {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.marquee-group > * {
+  margin-right: 3rem;
+  flex-shrink: 0;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Reveal-on-scroll (progressive enhancement; visible by default if JS off) */
+@media (prefers-reduced-motion: no-preference) {
+  :root.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  :root.js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Social buttons — neutral by default, brand color on hover */
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.75rem;
+  width: 2.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-canvas);
+  color: var(--color-muted);
+  transition:
+    background-color 0.25s ease,
+    background-image 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+.social-btn:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+.social-fb:hover {
+  background: #1877f2;
+  border-color: #1877f2;
+}
+.social-wa:hover {
+  background: #25d366;
+  border-color: #25d366;
+}
+.social-ig:hover {
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  border-color: transparent;
+}
+
+/* Section eyebrow pill */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-canvas);
+  padding: 0.3rem 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  box-shadow: var(--shadow-card);
+}

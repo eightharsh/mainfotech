@@ -1,0 +1,25 @@
+---
+// Destructure the properties from Astro.props
+const { title } = Astro.props;
+
+// Define TypeScript interface for the properties
+interface Props {
+  title: string;
+}
+// Define CSS classes for styling the button
+const baseClasses =
+  'inline-flex min-h-11 w-full items-center justify-center gap-x-2 rounded-xl px-4 py-3 text-sm font-bold text-white focus-visible:ring-3 outline-hidden transition duration-300';
+const borderClasses = 'border border-transparent';
+const bgColorClasses = 'btn-gradient';
+const hoverClasses = '';
+const fontSizeClasses = '2xl:text-base';
+const disabledClasses = 'disabled:pointer-events-none disabled:opacity-50';
+const ringClasses = 'ring-blue-400';
+---
+
+{/* Styled submit button with dynamic title */}
+<button
+  type="submit"
+  class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${hoverClasses} ${fontSizeClasses} ${disabledClasses} ${ringClasses}`}
+  >{title}</button
+>

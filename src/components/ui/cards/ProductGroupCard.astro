@@ -1,0 +1,106 @@
+---
+// Product category card: index badge, title, description and example grades.
+const { index, title, description, grades = [], accent = 'blue' } = Astro.props;
+
+interface Props {
+  index?: string;
+  title: string;
+  description: string;
+  grades?: string[];
+  accent?: 'blue' | 'purple' | 'cyan' | 'emerald' | 'amber' | 'red';
+}
+
+const accents = {
+  blue: {
+    text: 'text-blue-600',
+    tile: 'bg-blue-50 text-blue-600',
+    chip: 'bg-blue-50 text-blue-700',
+    hover: 'hover:border-blue-200',
+  },
+  purple: {
+    text: 'text-purple-600',
+    tile: 'bg-purple-50 text-purple-600',
+    chip: 'bg-purple-50 text-purple-700',
+    hover: 'hover:border-purple-200',
+  },
+  cyan: {
+    text: 'text-cyan-600',
+    tile: 'bg-cyan-50 text-cyan-600',
+    chip: 'bg-cyan-50 text-cyan-700',
+    hover: 'hover:border-cyan-200',
+  },
+  emerald: {
+    text: 'text-emerald-600',
+    tile: 'bg-emerald-50 text-emerald-600',
+    chip: 'bg-emerald-50 text-emerald-700',
+    hover: 'hover:border-emerald-200',
+  },
+  amber: {
+    text: 'text-amber-600',
+    tile: 'bg-amber-50 text-amber-600',
+    chip: 'bg-amber-50 text-amber-700',
+    hover: 'hover:border-amber-200',
+  },
+  red: {
+    text: 'text-red-600',
+    tile: 'bg-red-50 text-red-600',
+    chip: 'bg-red-50 text-red-700',
+    hover: 'hover:border-red-200',
+  },
+};
+const a = accents[accent] ?? accents.blue;
+---
+
+<article
+  class:list={[
+    'group flex h-full flex-col rounded-xl border border-border bg-canvas p-7 transition-colors duration-200 sm:p-8',
+    a.hover,
+  ]}
+>
+  <div class="flex items-center justify-between">
+    {
+      index && (
+        <span class:list={['font-display text-sm font-semibold', a.text]}>
+          {index}
+        </span>
+      )
+    }
+    <span
+      class:list={[
+        'inline-flex h-8 w-8 items-center justify-center rounded-full transition-transform duration-200 group-hover:translate-x-0.5',
+        a.tile,
+      ]}
+      aria-hidden="true"
+    >
+      <svg
+        class="h-4 w-4"
+        viewBox="0 0 20 20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M5 10h10M11 6l4 4-4 4" />
+      </svg>
+    </span>
+  </div>
+  <h3 class="mt-5 text-lg font-semibold text-ink">{title}</h3>
+  <p class="mt-2 text-[15px] leading-relaxed text-body">{description}</p>
+  {
+    grades.length > 0 && (
+      <div class="mt-5 flex flex-wrap gap-2 border-t border-border/70 pt-5">
+        {grades.map(grade => (
+          <span
+            class:list={[
+              'rounded-full px-3 py-1 text-xs font-medium',
+              a.chip,
+            ]}
+          >
+            {grade}
+          </span>
+        ))}
+      </div>
+    )
+  }
+</article>

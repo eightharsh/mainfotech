@@ -1,0 +1,73 @@
+---
+// Pre-footer CTA — rich brand-gradient panel closing each page.
+const {
+  title,
+  subtitle,
+  primaryLabel = 'Contact us',
+  primaryUrl = '/contact',
+  secondaryLabel,
+  secondaryUrl,
+} = Astro.props;
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  primaryLabel?: string;
+  primaryUrl?: string;
+  secondaryLabel?: string;
+  secondaryUrl?: string;
+}
+---
+
+<section class="py-14 sm:py-20">
+  <div
+    class="bg-brand-gradient relative overflow-hidden rounded-3xl px-6 py-14 text-center sm:px-12 sm:py-20"
+  >
+    {/* Decorative glow accents */}
+    <div
+      class="pointer-events-none absolute -top-24 -left-16 h-64 w-64 rounded-full bg-white/10 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute -right-16 -bottom-24 h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="relative">
+      <h2
+        class="font-display mx-auto max-w-2xl text-3xl leading-[1.1] text-balance text-white sm:text-4xl"
+      >
+        {title}
+      </h2>
+      {
+        subtitle && (
+          <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+            {subtitle}
+          </p>
+        )
+      }
+      <div
+        class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
+      >
+        <a
+          href={primaryUrl}
+          class="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-blue-700 shadow-sm transition duration-200 hover:bg-blue-50 hover:shadow-md"
+        >
+          {primaryLabel}
+        </a>
+        {
+          secondaryLabel && secondaryUrl && (
+            <a
+              href={secondaryUrl}
+              class="inline-flex items-center justify-center rounded-lg border border-white/40 px-6 py-3 text-sm font-semibold text-white transition duration-200 hover:border-white/70 hover:bg-white/10"
+            >
+              {secondaryLabel}
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,493 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { Image } from 'astro:assets';
+import { SITE, SEO, CONTACT } from '@data/constants';
+import imgStorage from '@images/products/nvme.avif';
+import imgPrinter from '@images/products/printer.avif';
+import imgCpu from '@images/products/cpu.avif';
+import imgHero from '@images/hero.avif';
+import imgReviewSumit from '@images/reviews/sumith_shetty.png';
+import imgReviewPradum from '@images/reviews/PRADUM_DHURIYA.png';
+import imgReviewBanita from '@images/reviews/banita.png';
+
+// Maps a testimonial's `image` key (see CONTACT.testimonials) to its imported asset.
+const reviewAvatars: Record<string, ImageMetadata> = {
+  sumith_shetty: imgReviewSumit,
+  PRADUM_DHURIYA: imgReviewPradum,
+  banita: imgReviewBanita,
+};
+
+const pageTitle = `${SITE.title} | ${SITE.tagline}`;
+const wrap = 'mx-auto w-full max-w-[80rem] px-4 sm:px-6 lg:px-8';
+const reviews = CONTACT.googleReviews;
+const waBase = 'https://wa.me/' + CONTACT.phoneTel.replace(/\D/g, '');
+const waFor = (item: string) =>
+  `${waBase}?text=${encodeURIComponent(`Hi MA Infotech! 👋 I'm interested in ${item}.`)}`;
+
+// Inline Lucide-style icons (stroke = currentColor)
+const I = {
+  pc: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="14" rx="2"/><path d="M9 21h6M12 17v4"/><path d="M8 7h.01M8 11h5"/></svg>',
+  repair: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.3L3 18v3h3l6.4-6.3a4 4 0 0 0 5.3-5.4l-2.6 2.6-2-2 2.6-2.6Z"/></svg>',
+  network: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 15.8a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/><path d="M2 9a15 15 0 0 1 20 0"/></svg>',
+  cctv: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l15-4 1 4-15 4z"/><path d="M5 11v4a2 2 0 0 0 2 2h6"/><path d="M15 15h5M17.5 15v5"/><circle cx="9" cy="8.5" r="1"/></svg>',
+  office: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V6l8-3 8 3v15"/><path d="M9 9h.01M15 9h.01M9 13h.01M15 13h.01M10 21v-4h4v4"/></svg>',
+  support: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 0-9 9v4a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-1v6h1a2 2 0 0 0 2-2v-4a9 9 0 0 0-9-9Z"/><path d="M16 19a3 3 0 0 1-3 2h-1"/></svg>',
+};
+
+const services = [
+  { icon: 'pc', tile: 'tile-navy', title: 'Custom PC Building', desc: 'Gaming rigs, creator workstations, and office desktops built to your budget and workload.', big: true },
+  { icon: 'repair', tile: 'tile-red', title: 'Laptop & PC Repair', desc: 'Screens, batteries, boards, upgrades — most faults fixed the same day.' },
+  { icon: 'network', tile: 'tile-cyan', title: 'Networking & Wi-Fi', desc: 'Fast, stable LAN, Wi-Fi and structured cabling.' },
+  { icon: 'cctv', tile: 'tile-emerald', title: 'CCTV & Security', desc: 'HD cameras with DVR/NVR and mobile viewing.' },
+  { icon: 'office', tile: 'tile-purple', title: 'Office & Site Setup', desc: 'Complete IT & cabling for new shops and offices.' },
+];
+
+const stats = [
+  { value: '10+', label: 'Years in Mumbai' },
+  { value: '5,000+', label: 'Devices repaired' },
+  { value: '40+', label: 'Brands stocked' },
+  { value: '4.7★', label: 'Customer rating' },
+];
+
+const productTiles = [
+  { img: imgStorage, title: 'Storage & SSDs', desc: 'Faster boot times and more space for your data.', chips: ['NVMe', 'SATA SSD', 'HDD'] },
+  { img: imgPrinter, title: 'Printers & Scanners', desc: 'Print, scan and refill — for home and office.', chips: ['Inkjet', 'Laser', 'Ink & toner'] },
+  { img: imgCpu, title: 'PC Components', desc: 'Everything you need to build or upgrade a machine.', chips: ['CPU/GPU', 'RAM', 'Boards'] },
+];
+
+const brands = ['Dell', 'HP', 'Lenovo', 'Asus', 'Acer', 'MSI', 'Intel', 'AMD', 'Samsung', 'Seagate', 'TP-Link', 'Hikvision'];
+
+const guarantees = [
+  { title: 'Genuine & sealed', desc: 'Authorised-distributor stock with full brand warranty.' },
+  { title: 'Same-day repairs', desc: 'Most laptop & PC faults diagnosed and fixed the same day.' },
+  { title: 'On-site across Mumbai', desc: 'Doorstep visits for homes, shops and offices.' },
+  { title: 'Upfront pricing', desc: 'Free diagnosis and a clear quote before any work.' },
+];
+
+// Local-intent FAQs — surfaced on the page AND as FAQPage structured data.
+const faqs = [
+  {
+    q: 'Where is MA Infotech located in Mumbai?',
+    a: `We're at ${CONTACT.addressFull}. Walk-ins are welcome Monday to Saturday, 9:00 AM to 10:00 PM.`,
+  },
+  {
+    q: 'Do you offer on-site or doorstep computer service?',
+    a: `Yes. We provide on-site repairs and IT setup across ${CONTACT.areasServed.join(', ')} and nearby areas of Mumbai.`,
+  },
+  {
+    q: 'Can most laptop and PC repairs be done the same day?',
+    a: 'Most common faults — screens, batteries, storage/RAM upgrades and software issues — are diagnosed and fixed the same day. We give you a clear quote before any work starts.',
+  },
+  {
+    q: 'Are your products genuine and covered by warranty?',
+    a: 'Yes. Everything we sell is sealed, authorised-distributor stock with full manufacturer warranty, and our repairs carry a written service warranty.',
+  },
+  {
+    q: 'Do you install CCTV and networking for shops and offices?',
+    a: 'We plan and install HD/IP CCTV with mobile viewing, plus Wi-Fi, structured cabling and complete office IT setups for homes, shops and businesses.',
+  },
+];
+
+// FAQPage JSON-LD (separate from the site-wide LocalBusiness schema).
+const faqStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<MainLayout title={pageTitle} structuredData={SEO.structuredData}>
+  {/* ─── HERO ─────────────────────────────────────────────────────────── */}
+  <section class="mesh-hero relative overflow-hidden">
+    <div class="grid-pattern pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    <div class="brand-glow brand-glow--navy -top-24 -left-24 h-96 w-96" aria-hidden="true"></div>
+    <div class="brand-glow brand-glow--red top-20 -right-16 h-96 w-96" aria-hidden="true"></div>
+
+    <div class={`${wrap} relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10 lg:py-24`}>
+      <div data-reveal>
+        <span class="eyebrow">
+          <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>
+          {CONTACT.city} · Sales · Service · Solutions
+        </span>
+        <h1 class="font-display mt-6 text-ink">
+          <span class="block text-xl font-semibold tracking-tight text-ink/70 sm:text-2xl lg:text-[1.65rem]">
+            The tech shop that keeps
+          </span>
+          <span class="mt-1.5 block text-[2.1rem] leading-[1.04] text-balance sm:text-[2.6rem] lg:text-[2.9rem]">
+            <span class="text-gradient whitespace-nowrap">Aamchi Mumbai</span> running
+          </span>
+        </h1>
+        <p class="mt-5 max-w-lg text-base leading-relaxed text-body sm:mt-6 sm:text-lg">
+          Custom PCs, same-day repairs, networking &amp; CCTV — genuine products
+          from every top brand, all under one roof.
+        </p>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="/contact" class="btn-gradient inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold text-white sm:w-auto">
+            Book a service
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="/products" class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-border bg-white px-7 text-sm font-semibold text-ink transition-colors hover:border-navy hover:bg-surface sm:w-auto">
+            Shop products
+          </a>
+        </div>
+
+        <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <a href={reviews.url} target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3">
+            {/* Overlapping reviewer photos */}
+            <div class="flex -space-x-3">
+              {[imgReviewSumit, imgReviewPradum, imgReviewBanita].map(img => (
+                <Image
+                  src={img}
+                  alt=""
+                  width={72}
+                  height={72}
+                  loading="eager"
+                  class="h-9 w-9 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5"
+                />
+              ))}
+            </div>
+            <span class="leading-tight">
+              <span class="flex items-center gap-1.5">
+                <span class="flex text-amber-500">
+                  {[0, 1, 2, 3, 4].map(() => (
+                    <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8-5.1-4.6 6.9-.7z"/></svg>
+                  ))}
+                </span>
+                <span class="text-base font-bold text-ink">{reviews.rating}/5</span>
+              </span>
+              <span class="mt-1 flex items-center gap-1.5 text-[13px] font-medium text-muted">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8Z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24Z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8l4-3.1Z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-5 6.7-5Z"/></svg>
+                Rated on Google
+              </span>
+            </span>
+          </a>
+          <span class="hidden h-8 w-px bg-border sm:block"></span>
+          <span class="text-sm font-medium text-body">✓ Genuine products</span>
+          <span class="text-sm font-medium text-body">✓ Service warranty</span>
+        </div>
+      </div>
+
+      {/* Product showcase */}
+      <div class="relative" data-reveal data-reveal-delay="120">
+        <div class="relative mx-auto max-w-md lg:max-w-lg">
+          {/* Framed product photo */}
+          <div class="card overflow-hidden rounded-[1.75rem] p-3 shadow-[0_40px_90px_-40px_rgba(23,37,94,0.55)]">
+            <div class="relative overflow-hidden rounded-[1.25rem]">
+              <Image
+                src={imgHero}
+                alt="MA Infotech — computer sales, repair and IT services in Mumbai"
+                widths={[400, 600, 800, 1100]}
+                sizes="(min-width:1024px) 32rem, 90vw"
+                class="aspect-[3/2] w-full object-cover"
+                loading="eager"
+                fetchpriority="high"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#17255e]/80 via-[#17255e]/10 to-transparent"></div>
+              <div class="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3 text-white">
+                <div>
+                  <p class="font-display text-lg font-bold drop-shadow-md">Sales · Repair · Setup</p>
+                  <p class="text-xs text-white/85">Every top brand, under one roof</p>
+                </div>
+                <span class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-semibold backdrop-blur">
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-300"></span> In stock
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Floating chips — hidden on the narrowest phones to keep the hero clean */}
+          <div class="glass absolute -left-2 top-6 hidden items-center gap-2.5 rounded-2xl px-3.5 py-2.5 sm:-left-6 sm:top-8 sm:flex" data-reveal data-reveal-delay="260">
+            <span class="icon-tile tile-red h-9 w-9" set:html={I.repair}></span>
+            <div><p class="text-xs font-bold text-ink">Same-day repair</p><p class="text-[11px] text-muted">Ready by evening</p></div>
+          </div>
+          <div class="glass absolute -right-1 bottom-14 hidden items-center gap-2.5 rounded-2xl px-3.5 py-2.5 sm:-right-4 sm:bottom-16 sm:flex" data-reveal data-reveal-delay="360">
+            <span class="icon-tile tile-emerald h-9 w-9" set:html={I.cctv}></span>
+            <div><p class="text-xs font-bold text-ink">CCTV online</p><p class="text-[11px] text-muted">4 cameras · live</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Brands marquee */}
+    <div class="relative border-t border-border/70 bg-white/60 py-6 backdrop-blur-sm">
+      <div class={`${wrap}`}>
+        <p class="text-center text-xs font-semibold tracking-[0.16em] text-muted uppercase">
+          Authorised sales & service for leading brands
+        </p>
+      </div>
+      <div class="marquee-mask mx-auto mt-5 max-w-[80rem] overflow-hidden">
+        <div class="marquee">
+          <div class="marquee-group">
+            {[...brands, ...brands].map(b => (
+              <span class="font-display text-xl font-bold text-gray-400">{b}</span>
+            ))}
+          </div>
+          <div class="marquee-group" aria-hidden="true">
+            {[...brands, ...brands].map(b => (
+              <span class="font-display text-xl font-bold text-gray-400">{b}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ─── SERVICES BENTO ───────────────────────────────────────────────── */}
+  <section class="relative overflow-hidden py-20 sm:py-24">
+    <div class="grid-pattern pointer-events-none absolute inset-0 opacity-60" aria-hidden="true"></div>
+    <div class="brand-glow brand-glow--navy -left-24 top-10 h-96 w-96" aria-hidden="true"></div>
+    <div class="brand-glow brand-glow--red -right-20 bottom-0 h-96 w-96" aria-hidden="true"></div>
+
+    <div class={`${wrap} relative`}>
+      <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+        <div class="max-w-xl">
+          <span class="eyebrow"><span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>What we do</span>
+          <h2 class="font-display mt-5 text-3xl text-balance text-ink sm:text-4xl lg:text-[2.75rem]">
+            One shop for <span class="text-gradient">sales & service</span>
+          </h2>
+          <p class="mt-4 max-w-md text-body">
+            From a single repair to a full office rollout — everything your tech
+            needs, handled under one roof.
+          </p>
+        </div>
+        <a href="/services" class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:underline">All services →</a>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          services.map((s, i) => (
+            <article
+              class:list={['card card-lift group relative overflow-hidden p-7', s.big && 'md:col-span-2 lg:row-span-1']}
+              data-reveal
+              data-reveal-delay={String(i * 60)}
+            >
+              <div class="hairline-gradient absolute inset-x-0 top-0 h-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+              <span class="font-display absolute right-6 top-5 text-5xl font-bold text-ink/[0.04] transition-colors duration-300 group-hover:text-ink/[0.07]">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span class:list={['icon-tile h-14 w-14 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105', s.tile]} set:html={s.icon in I ? I[s.icon as keyof typeof I] : ''}></span>
+              <h3 class="font-display mt-6 text-xl text-ink">{s.title}</h3>
+              <p class:list={['mt-2 leading-relaxed text-body', s.big ? 'max-w-md text-[15px]' : 'text-sm']}>{s.desc}</p>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600">
+                Learn more
+                <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ─── STATS BAND ───────────────────────────────────────────────────── */}
+  <section class={`${wrap}`}>
+    <div class="bg-brand-gradient relative transform-gpu overflow-hidden rounded-[2rem] px-6 py-12 sm:px-12 sm:py-14" data-reveal>
+      <div class="grid-pattern absolute inset-0 rounded-[inherit] opacity-30" aria-hidden="true"></div>
+      <div class="relative grid grid-cols-2 gap-8 text-center lg:grid-cols-4">
+        {
+          stats.map(s => (
+            <div>
+              <p class="font-display text-4xl text-white sm:text-5xl">{s.value}</p>
+              <p class="mt-2 text-sm font-medium text-white/75">{s.label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ─── PRODUCTS ─────────────────────────────────────────────────────── */}
+  <section class={`${wrap} py-20 sm:py-24`}>
+    <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+      <div class="max-w-xl">
+        <span class="eyebrow"><span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>Products</span>
+        <h2 class="font-display mt-5 text-3xl text-balance text-ink sm:text-4xl lg:text-[2.75rem]">
+          Genuine tech from <span class="text-gradient-red">every top brand</span>
+        </h2>
+      </div>
+      <a href="/products" class="inline-flex items-center gap-1.5 text-sm font-semibold text-red-600 hover:underline">Browse all →</a>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        productTiles.map((p, i) => (
+          <article class="card card-lift group flex flex-col overflow-hidden" data-reveal data-reveal-delay={String(i * 60)}>
+            <a
+              href="/products"
+              class="relative block aspect-[16/10] overflow-hidden bg-surface rounded-t-[1.25rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              aria-label={`Browse ${p.title}`}
+            >
+              <Image
+                src={p.img}
+                alt={p.title}
+                widths={[320, 500, 720]}
+                sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 92vw"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#17255e]/90 via-[#17255e]/25 to-transparent"></div>
+              <span class="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-bold tracking-wide text-navy uppercase">In stock</span>
+              <h3 class="font-display absolute inset-x-4 bottom-3 text-lg font-bold text-white drop-shadow-md">{p.title}</h3>
+            </a>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-sm leading-relaxed text-body">{p.desc}</p>
+              <div class="mt-3 flex flex-wrap gap-1.5">
+                {p.chips.map(c => (
+                  <span class="rounded-full bg-surface px-2.5 py-1 text-[11px] font-medium text-muted">{c}</span>
+                ))}
+              </div>
+              <a
+                href={waFor(p.title)}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-5 inline-flex items-center gap-2 self-start rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition-colors hover:bg-emerald-100"
+              >
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.2 1.1-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.1.1.3 0 .5l-.3.4-.3.4c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.2.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+                Enquire price
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  {/* ─── GUARANTEE SPLIT ──────────────────────────────────────────────── */}
+  <section class="bg-surface-soft py-20 sm:py-24">
+    <div class={`${wrap} grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16`}>
+      <div data-reveal>
+        <span class="eyebrow"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Why MA Infotech</span>
+        <h2 class="font-display mt-5 text-3xl text-balance text-ink sm:text-4xl lg:text-[2.75rem]">
+          Service you can trust,<br /><span class="text-gradient">prices you can see</span>
+        </h2>
+        <p class="mt-5 max-w-md text-body">
+          A decade of keeping Mumbai's homes and businesses running — with
+          genuine parts, honest advice, and quick turnaround.
+        </p>
+        <div class="glass mt-8 flex items-center gap-4 rounded-2xl p-5">
+          <span class="icon-tile tile-emerald h-12 w-12">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </span>
+          <div>
+            <p class="font-display text-lg text-ink">Written service warranty</p>
+            <p class="text-sm text-muted">On every repair and installation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        {
+          guarantees.map((g, i) => (
+            <div class="card p-6" data-reveal data-reveal-delay={String(i * 60)}>
+              <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg>
+              </span>
+              <h3 class="font-display mt-4 text-base text-ink">{g.title}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-body">{g.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ─── TESTIMONIALS ─────────────────────────────────────────────────── */}
+  <section class="relative overflow-hidden py-20 sm:py-24">
+    <div class="grid-pattern pointer-events-none absolute inset-0 opacity-60" aria-hidden="true"></div>
+    <div class="brand-glow brand-glow--red -right-24 top-10 h-96 w-96" aria-hidden="true"></div>
+
+    <div class={`${wrap} relative`}>
+      <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+        <div class="max-w-xl">
+          <span class="eyebrow"><span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span>Reviews</span>
+          <h2 class="font-display mt-5 text-3xl text-balance text-ink sm:text-4xl lg:text-[2.75rem]">
+            What Mumbaikars <span class="text-gradient">say about us</span>
+          </h2>
+          <p class="mt-4 flex items-center gap-2 text-body">
+            <span class="flex text-amber-500">
+              {[0, 1, 2, 3, 4].map(() => (
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8-5.1-4.6 6.9-.7z"/></svg>
+              ))}
+            </span>
+            <span class="font-semibold text-ink">{reviews.rating}/5</span>
+            <span class="text-muted">rated by customers on Google</span>
+          </p>
+        </div>
+        <a href={reviews.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 hover:underline">Read all reviews →</a>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          CONTACT.testimonials.map((t, i) => (
+            <figure class="card card-lift flex flex-col p-7" data-reveal data-reveal-delay={String(i * 60)}>
+              <div class="flex items-center justify-between">
+                <span class="flex text-amber-500" aria-label={`${t.rating} out of 5 stars`}>
+                  {Array.from({ length: t.rating }).map(() => (
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8-5.1-4.6 6.9-.7z"/></svg>
+                  ))}
+                </span>
+                <svg class="h-6 w-6 text-ink/[0.08]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.2 6A5.2 5.2 0 0 0 3 11.2V18h6.4v-6.4H6.2A2.8 2.8 0 0 1 9 8.8V6H7.2Zm10.6 0a5.2 5.2 0 0 0-4.2 5.2V18H20v-6.4h-3.2a2.8 2.8 0 0 1 2.8-2.8V6h-1.8Z"/></svg>
+              </div>
+              <blockquote class="mt-4 flex-1 text-[15px] leading-relaxed text-body">“{t.quote}”</blockquote>
+              <figcaption class="mt-6 flex items-center gap-3 border-t border-border pt-5">
+                <Image
+                  src={reviewAvatars[t.image]}
+                  alt={t.name}
+                  width={80}
+                  height={80}
+                  class="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-white shadow-[0_4px_12px_-4px_rgba(15,23,42,0.35)]"
+                  loading="lazy"
+                />
+                <span class="min-w-0">
+                  <span class="block font-display text-sm font-semibold text-ink">{t.name}</span>
+                  <span class="flex items-center gap-1 text-xs text-muted">
+                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1Z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84Z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.3 9.14 5.38 12 5.38Z"/></svg>
+                    Google review
+                  </span>
+                </span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ─── FAQ ──────────────────────────────────────────────────────────── */}
+  <section class={`${wrap} py-20 sm:py-24`}>
+    <div class="mx-auto max-w-3xl">
+      <div class="text-center" data-reveal>
+        <span class="eyebrow mx-auto"><span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>FAQ</span>
+        <h2 class="font-display mt-5 text-3xl text-balance text-ink sm:text-4xl lg:text-[2.75rem]">
+          Questions Mumbaikars <span class="text-gradient">often ask</span>
+        </h2>
+      </div>
+      <div class="mt-10 space-y-3">
+        {
+          faqs.map((f, i) => (
+            <details class="card group overflow-hidden p-0" data-reveal data-reveal-delay={String(i * 50)}>
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-5 sm:p-6">
+                <h3 class="font-display text-base text-ink sm:text-lg">{f.q}</h3>
+                <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface text-blue-600 transition-transform duration-200 group-open:rotate-45">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                </span>
+              </summary>
+              <p class="px-5 pb-5 text-[15px] leading-relaxed text-body sm:px-6 sm:pb-6">{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ structured data for rich results */}
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(faqStructuredData)}
+  />
+</MainLayout>

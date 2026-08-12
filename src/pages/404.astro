@@ -1,0 +1,71 @@
+---
+// Import section components
+import MainLayout from '@/layouts/MainLayout.astro';
+import Btn404 from '@components/ui/buttons/Btn404.astro';
+import { SITE } from '@data/constants';
+
+// Define types for translations
+const pageTitle = `Page Not Found | ${SITE.title}`;
+const metaDescription =
+  'This page could not be found. Return to MA Infotech for computer sales, services, products, and contact information.';
+const lang = 'en';
+const subTitle = 'Page not found';
+const content =
+  'The page you requested is unavailable. Head home to browse our products, services, or contact our team.';
+const homeTitle = 'Go Home';
+const backTitle = 'Go Back';
+const homeHref = '/';
+---
+
+<MainLayout
+  title={pageTitle}
+  lang={lang}
+  hideFooter
+  customDescription={metaDescription}
+  customOgTitle={pageTitle}
+>
+  <section class="min-h-[calc(100svh-5.5rem)]" aria-labelledby="subtitle">
+    <div
+      class="pointer-events-none fixed inset-0 z-10 grid place-content-center px-4"
+    >
+      <div
+        class="pointer-events-auto mx-auto max-w-(--breakpoint-sm) text-center"
+      >
+        <h1
+          class="text-dark mb-4 text-7xl font-extrabold text-[#1E3AFF] lg:text-9xl"
+        >
+          404
+        </h1>
+        <p
+          id="subtitle"
+          class="mb-4 text-3xl font-bold tracking-tight text-balance text-neutral-700 md:text-4xl"
+        >
+          {subTitle}
+        </p>
+        <p id="content" class="mb-4 text-lg text-pretty text-neutral-600">
+          {content}
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <a
+            href={homeHref}
+            class="group inline-flex items-center justify-center gap-x-2 rounded-lg border border-transparent bg-primary px-4 py-3 text-sm font-semibold text-white ring-neutral-300 outline-hidden transition-colors duration-200 hover:bg-primary-active focus-visible:ring-3 2xl:text-base"
+          >
+            {homeTitle}
+          </a>
+          <Btn404 title={backTitle} id="go-back" />
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<script>
+  const goBackButton = document.getElementById('go-back');
+  goBackButton?.addEventListener('click', () => {
+    if (window.history.length > 1) {
+      history.back();
+    } else {
+      window.location.href = '/';
+    }
+  });
+</script>
