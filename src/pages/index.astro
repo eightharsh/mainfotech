@@ -1,7 +1,7 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import { Image } from 'astro:assets';
-import { SITE, SEO, CONTACT } from '@data/constants';
+import { SITE, SEO, CONTACT, BRANDS } from '@data/constants';
 import imgStorage from '@images/products/nvme.avif';
 import imgPrinter from '@images/products/printer.avif';
 import imgCpu from '@images/products/cpu.avif';
@@ -100,20 +100,7 @@ const productTiles = [
   },
 ];
 
-const brands = [
-  'Dell',
-  'HP',
-  'Lenovo',
-  'Asus',
-  'Acer',
-  'MSI',
-  'Intel',
-  'AMD',
-  'Samsung',
-  'Seagate',
-  'TP-Link',
-  'Hikvision',
-];
+const brands = BRANDS;
 
 const guarantees = [
   {

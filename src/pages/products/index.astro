@@ -1,7 +1,7 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import { Image } from 'astro:assets';
-import { SITE, CONTACT } from '@data/constants';
+import { SITE, CONTACT, BRANDS } from '@data/constants';
 import imgLaptop from '@images/products/laptop.avif';
 import imgDesktop from '@images/products/desktop.webp';
 import imgCpu from '@images/products/cpu.avif';
@@ -82,20 +82,7 @@ const categories = [
   },
 ];
 
-const brands = [
-  'Dell',
-  'HP',
-  'Lenovo',
-  'Asus',
-  'Acer',
-  'MSI',
-  'Intel',
-  'AMD',
-  'Samsung',
-  'Seagate',
-  'TP-Link',
-  'Hikvision',
-];
+const brands = BRANDS;
 
 const highlights = [
   {

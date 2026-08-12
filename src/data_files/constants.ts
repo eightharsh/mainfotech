@@ -168,3 +168,32 @@ export const OG = {
   description: SITE.description,
   image: ogImageSrc,
 };
+
+// Brands shown in the "authorised sales & service" marquee (home + products).
+export const BRANDS = [
+  'Dell',
+  'HP',
+  'Lenovo',
+  'Asus',
+  'Acer',
+  'MSI',
+  'Apple',
+  'Intel',
+  'AMD',
+  'Nvidia',
+  'Gigabyte',
+  'Corsair',
+  'Logitech',
+  'Samsung',
+  'Seagate',
+  'Western Digital',
+  'Kingston',
+  'TP-Link',
+  'D-Link',
+  'Netgear',
+  'Hikvision',
+  'CP Plus',
+  'Dahua',
+  'Canon',
+  'Epson',
+];
