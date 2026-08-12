@@ -59,7 +59,11 @@ export const GET: APIRoute = async () => {
     theme_color: '#17255e',
     background_color: '#ffffff',
     shortcuts: [
-      { name: 'Call the shop', url: '/contact', description: 'Call MA Infotech' },
+      {
+        name: 'Call the shop',
+        url: '/contact',
+        description: 'Call MA Infotech',
+      },
       { name: 'Products', url: '/products', description: 'Browse products' },
       { name: 'Services', url: '/services', description: 'View services' },
     ],

@@ -28,7 +28,9 @@ async function readPayload(request: Request): Promise<Record<string, string>> {
   const contentType = request.headers.get('content-type') || '';
   if (contentType.includes('application/json')) {
     const data = await request.json().catch(() => ({}));
-    return data && typeof data === 'object' ? (data as Record<string, string>) : {};
+    return data && typeof data === 'object'
+      ? (data as Record<string, string>)
+      : {};
   }
   const form = await request.formData();
   const out: Record<string, string> = {};
