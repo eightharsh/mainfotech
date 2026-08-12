@@ -64,56 +64,6 @@
       "permanent": true
     },
     {
-      "source": "/blog/:path*",
-      "destination": "/news/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/blog",
-      "destination": "/news",
-      "permanent": true
-    },
-    {
-      "source": "/fr/blog/:path*",
-      "destination": "/news/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/fr/blog",
-      "destination": "/news",
-      "permanent": true
-    },
-    {
-      "source": "/services",
-      "destination": "/capabilities",
-      "permanent": true
-    },
-    {
-      "source": "/services/:path*",
-      "destination": "/capabilities",
-      "permanent": true
-    },
-    {
-      "source": "/capabilities/manufacturing",
-      "destination": "/capabilities",
-      "permanent": true
-    },
-    {
-      "source": "/capabilities/manufacturing/:path*",
-      "destination": "/capabilities",
-      "permanent": true
-    },
-    {
-      "source": "/insights/:path*",
-      "destination": "/news",
-      "permanent": true
-    },
-    {
-      "source": "/insights",
-      "destination": "/news",
-      "permanent": true
-    },
-    {
       "source": "/welcome-to-docs",
       "destination": "/",
       "permanent": true
@@ -191,16 +141,6 @@
     {
       "source": "/zh-cn",
       "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/news/aniversary",
-      "destination": "/news/anniversary",
-      "permanent": true
-    },
-    {
-      "source": "/news/aniversary/",
-      "destination": "/news/anniversary/",
       "permanent": true
     }
   ]
