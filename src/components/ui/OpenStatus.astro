@@ -1,0 +1,22 @@
+---
+// Live "Open now / Closed" indicator.
+// Renders a placeholder that openStatus.js fills in on the client, computing the
+// shop's open state in ITS OWN timezone (BUSINESS_TZ) so it's correct for every
+// visitor. Hidden until JS upgrades it — the footer always lists full hours as
+// the no-JS fallback, so nothing important is lost when scripts are disabled.
+interface Props {
+  class?: string;
+  /** 'pill' = bordered chip (light backgrounds); 'inline' = bare dot + text. */
+  variant?: 'pill' | 'inline';
+}
+const { class: className = '', variant = 'pill' } = Astro.props;
+---
+
+<span
+  class:list={['open-status', `open-status--${variant}`, className]}
+  data-open-status
+  hidden
+>
+  <span class="open-status__dot" aria-hidden="true"></span>
+  <span class="open-status__text" data-open-status-text></span>
+</span>
