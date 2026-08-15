@@ -96,11 +96,16 @@ const menuLinks = strings.navBarLinks.filter(link => link.url !== '/contact');
         aria-label="Global"
       >
         <a
-          class="flex min-h-11 flex-none items-center rounded-lg outline-hidden focus-visible:ring-3 focus-visible:ring-blue-300"
+          class="flex min-h-11 flex-none items-center gap-2 rounded-lg outline-hidden focus-visible:ring-3 focus-visible:ring-blue-300"
           href={homeUrl}
           aria-label="MA Infotech home"
         >
           <BrandLogo class="h-9 w-auto object-contain sm:h-10 lg:h-11" />
+          <span
+            class="font-display text-navy text-center text-base font-bold md:hidden"
+          >
+            एम.ए. इन्फोटेक
+          </span>
         </a>
 
         {/* Desktop links — centered */}

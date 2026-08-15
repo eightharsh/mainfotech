@@ -6,6 +6,7 @@ import { CONTACT } from '@data/constants';
 ---
 
 <nav
+  id="mobile-action-bar"
   class="fixed inset-x-0 bottom-0 z-40 md:hidden"
   style="padding-bottom: env(safe-area-inset-bottom);"
   aria-label="Quick contact actions"
@@ -17,7 +18,7 @@ import { CONTACT } from '@data/constants';
       {/* Call */}
       <a
         href={`tel:${CONTACT.phoneTel}`}
-        class="group text-navy flex flex-col items-center gap-1 py-2.5 transition-transform active:scale-95"
+        class="group text-navy flex touch-manipulation flex-col items-center gap-1 py-2.5 transition-transform active:scale-95"
         aria-label="Call MA Infotech"
       >
         <svg
@@ -41,7 +42,7 @@ import { CONTACT } from '@data/constants';
         href={CONTACT.whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="group flex flex-col items-center"
+        class="group flex touch-manipulation flex-col items-center"
         aria-label="Chat on WhatsApp"
       >
         <span
@@ -67,7 +68,7 @@ import { CONTACT } from '@data/constants';
         href={CONTACT.mapDirectionsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="group flex flex-col items-center gap-1 py-2.5 text-red-600 transition-transform active:scale-95"
+        class="group flex touch-manipulation flex-col items-center gap-1 py-2.5 text-red-600 transition-transform active:scale-95"
         aria-label="Get directions"
       >
         <svg

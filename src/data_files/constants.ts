@@ -1,4 +1,19 @@
 import ogImageSrc from '@images/social.png';
+import dellLogo from '@images/brand/Dell_logo_2016.svg.webp';
+import hpLogo from '@images/brand/HP_logo_2025.svg.webp';
+import asusLogo from '@images/brand/ASUS_Logo.svg.webp';
+import acerLogo from '@images/brand/Acer_2011.svg.webp';
+import msiLogo from '@images/brand/Micro-Star_International_logo.svg.webp';
+import appleLogo from '@images/brand/Apple_logo_black.svg.webp';
+import intelLogo from '@images/brand/Intel_logo_2023.svg.webp';
+import amdLogo from '@images/brand/AMD_Logo.svg.webp';
+import samsungLogo from '@images/brand/Samsung_Black_icon.svg.webp';
+import sonyLogo from '@images/brand/Sony_logo.svg.webp';
+import wdLogo from '@images/brand/WD_Logo.svg.webp';
+import dlinkLogo from '@images/brand/D-Link_Logo_Blue_strap.svg.webp';
+import hikvisionLogo from '@images/brand/Hikvision-logo.png';
+import cpPlusLogo from '@images/brand/cp-plus-logo-png_seeklogo-538028.png';
+import canonLogo from '@images/brand/Canon_wordmark.svg.webp';
 
 export const SITE = {
   title: 'MA Infotech',
@@ -16,7 +31,7 @@ export const SITE = {
    TODO: Replace the placeholder phone, email, address, and social links below
    with MA Infotech's real details before going live. */
 export const CONTACT = {
-  email: 'info@mainfotech.com',
+  email: 'mainfotech21@gmail.com',
   phoneDisplay: '+91 70212 09087',
   phoneTel: '+917021209087',
   whatsappDisplay: '+91 70212 09087',
@@ -40,11 +55,14 @@ export const CONTACT = {
   // live listing, OR add a Google Places API key to fetch them automatically.
   // TODO: confirm actual rating + review count from the Google listing.
   googleReviews: {
-    rating: '4.7',
+    rating: '4.8',
     // TODO: set the real review count from the Google listing. A star rating
     // snippet is only emitted in structured data when this is a real number > 0.
     reviewCount: '',
     url: 'https://maps.app.goo.gl/vnsqwJdYDBRQzL29A',
+    // Opens the "Write a review" box directly — generated from Google Business
+    // Profile's "Get more reviews" link.
+    writeReviewUrl: 'https://g.page/r/Ce-YSc5oc6ZyEAE/review',
   },
   // Homepage testimonials — real, verbatim reviews from the Google listing.
   // `image` is the filename (without extension) in src/images/reviews/.
@@ -169,31 +187,22 @@ export const OG = {
   image: ogImageSrc,
 };
 
-// Brands shown in the "authorised sales & service" marquee (home + products).
-export const BRANDS = [
-  'Dell',
-  'HP',
-  'Lenovo',
-  'Asus',
-  'Acer',
-  'MSI',
-  'Apple',
-  'Intel',
-  'AMD',
-  'Nvidia',
-  'Gigabyte',
-  'Corsair',
-  'Logitech',
-  'Samsung',
-  'Seagate',
-  'Western Digital',
-  'Kingston',
-  'TP-Link',
-  'D-Link',
-  'Netgear',
-  'Hikvision',
-  'CP Plus',
-  'Dahua',
-  'Canon',
-  'Epson',
+// Brand logos shown in the "sales & service" marquee (home + products).
+// Only brands with a logo file in src/images/brand/ are listed here.
+export const BRAND_LOGOS = [
+  { name: 'Dell', src: dellLogo },
+  { name: 'HP', src: hpLogo },
+  { name: 'Asus', src: asusLogo },
+  { name: 'Acer', src: acerLogo },
+  { name: 'MSI', src: msiLogo },
+  { name: 'Apple', src: appleLogo },
+  { name: 'Intel', src: intelLogo },
+  { name: 'AMD', src: amdLogo },
+  { name: 'Samsung', src: samsungLogo },
+  { name: 'Sony', src: sonyLogo },
+  { name: 'Western Digital', src: wdLogo },
+  { name: 'D-Link', src: dlinkLogo },
+  { name: 'Hikvision', src: hikvisionLogo },
+  { name: 'CP Plus', src: cpPlusLogo },
+  { name: 'Canon', src: canonLogo },
 ];
