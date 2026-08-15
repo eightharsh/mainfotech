@@ -25,7 +25,7 @@ import imgPromo from '@images/popup.jpeg';
       id="promo-popup-close"
       type="button"
       aria-label="Close"
-      class="text-ink absolute -top-3 -right-3 inline-flex h-10 w-10 shrink-0 touch-manipulation items-center justify-center rounded-full bg-white shadow-lg ring-1 ring-black/10 transition-transform active:scale-95 sm:h-9 sm:w-9 sm:hover:scale-105"
+      class="text-ink absolute top-3 right-3 z-10 inline-flex h-9 w-9 shrink-0 touch-manipulation items-center justify-center rounded-full bg-white shadow-[0_2px_10px_rgba(0,0,0,0.35)] ring-1 ring-black/15 transition-transform active:scale-95 sm:hover:scale-105"
     >
       <svg
         width="18"
@@ -33,7 +33,7 @@ import imgPromo from '@images/popup.jpeg';
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2.4"
+        stroke-width="2.6"
         stroke-linecap="round"
         stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg
       >
@@ -48,7 +48,9 @@ import imgPromo from '@images/popup.jpeg';
       <Image
         src={imgPromo}
         alt="MA Infotech — Borivali & Kandivali repair and services, 14+ years experience. Call 7021209087"
-        width={640}
+        width={896}
+        densities={[1, 1.5, 2]}
+        quality={90}
         loading="eager"
         class="max-h-[88dvh] w-full rounded-2xl object-contain sm:max-h-[85dvh]"
       />

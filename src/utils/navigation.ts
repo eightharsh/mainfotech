@@ -29,10 +29,9 @@ const footerLinks = [
   },
 ];
 // Social icons shown in the footer (WhatsApp comes from CONTACT.whatsappUrl).
-// TODO: Replace with MA Infotech's real Facebook & Instagram profile URLs.
 const socialLinks = {
-  facebook: 'https://www.facebook.com/',
-  instagram: 'https://www.instagram.com/',
+  facebook: 'https://www.facebook.com/100063712883917/',
+  instagram: 'https://www.instagram.com/mainfotech/',
 };
 
 export default {
