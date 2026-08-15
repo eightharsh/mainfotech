@@ -1,6 +1,5 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import PromoPopup from '@components/ui/PromoPopup.astro';
 import { Image } from 'astro:assets';
 import { SITE, SEO, CONTACT, BRAND_LOGOS } from '@data/constants';
 import imgStorage from '@images/products/nvme.avif';
@@ -186,8 +185,6 @@ const faqStructuredData = {
 ---
 
 <MainLayout title={pageTitle} structuredData={SEO.structuredData}>
-  <PromoPopup />
-
   {/* ─── HERO ─────────────────────────────────────────────────────────── */}
   <section class="mesh-hero relative overflow-hidden">
     <div
