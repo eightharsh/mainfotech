@@ -132,9 +132,11 @@ interface Props {
     </script>
   </head>
   <body class="bg-canvas text-ink selection:bg-ink selection:text-white">
-    {/* Top loading bar — visible feedback while a page navigation is in flight.
+    {
+      /* Top loading bar — visible feedback while a page navigation is in flight.
        transition:persist keeps this exact element across navigations so our
-       cached reference below never goes stale mid-transition. */}
+       cached reference below never goes stale mid-transition. */
+    }
     <div id="page-progress" aria-hidden="true" transition:persist></div>
     <script is:inline>
       (function () {
