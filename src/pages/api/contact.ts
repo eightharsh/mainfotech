@@ -45,6 +45,7 @@ const INQUIRY_LABELS: Record<string, string> = {
   networking: 'Networking / Wi-Fi',
   cctv: 'CCTV / Security',
   amc: 'AMC / IT support',
+  'web-development': 'Website development',
   other: 'Other',
 };
 
@@ -89,14 +90,24 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
+  const timestamp = new Date().toLocaleString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    day: '2-digit',
+    month: 'short',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  });
+
   const text =
-    `🖥️ <b>New enquiry — MA Infotech</b>\n\n` +
-    `<b>Name:</b> ${esc(name)}\n` +
-    `<b>Type:</b> ${esc(inquiryLabel)}\n` +
-    (email ? `<b>Email:</b> ${esc(email)}\n` : '') +
-    (phone ? `<b>Phone:</b> ${esc(phone)}\n` : '') +
-    (message ? `\n<b>Message:</b>\n${esc(message)}\n` : '') +
-    `\n<i>via mainfotech.com</i>`;
+    `📩 <b>New Enquiry from Website</b>\n\n` +
+    `Name: ${esc(name)}\n` +
+    `Looking for: ${esc(inquiryLabel)}\n` +
+    (email ? `Email: ${esc(email)}\n` : '') +
+    (phone ? `Phone: ${esc(phone)}\n` : '') +
+    (message ? `\nMessage:\n${esc(message)}\n` : '') +
+    `\nReceived: ${timestamp}\n` +
+    `Site: mainfotech.com`;
 
   const tgRes = await fetch(
     `https://api.telegram.org/bot${token}/sendMessage`,

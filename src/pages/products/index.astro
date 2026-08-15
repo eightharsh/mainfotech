@@ -1,7 +1,7 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import { Image } from 'astro:assets';
-import { SITE, CONTACT, BRANDS } from '@data/constants';
+import { SITE, CONTACT, BRAND_LOGOS } from '@data/constants';
 import imgLaptop from '@images/products/laptop.avif';
 import imgDesktop from '@images/products/desktop.webp';
 import imgCpu from '@images/products/cpu.avif';
@@ -11,6 +11,7 @@ import imgPrinter from '@images/products/printer.avif';
 import imgNetwork from '@images/products/networking.avif';
 import imgCctv from '@images/products/cctv.jpg';
 import imgAccessories from '@images/products/accessories.jpg';
+import imgBiometric from '@images/products/biometric-attendance.webp';
 
 const pageTitle = `Buy Laptops, Desktops, CCTV & PC Parts in Mumbai | ${SITE.title}`;
 const metaDescription =
@@ -75,6 +76,12 @@ const categories = [
     examples: ['Dome & bullet', 'IP cameras', 'DVR / NVR kits'],
   },
   {
+    img: imgBiometric,
+    title: 'Biometric Attendance',
+    desc: 'Fingerprint & face attendance systems for offices and shops.',
+    examples: ['Fingerprint scanners', 'Face recognition', 'Access control'],
+  },
+  {
     img: imgAccessories,
     title: 'Accessories & Power',
     desc: 'Everyday computing essentials and backups.',
@@ -82,7 +89,7 @@ const categories = [
   },
 ];
 
-const brands = BRANDS;
+const brands = BRAND_LOGOS;
 
 const highlights = [
   {
@@ -174,8 +181,14 @@ const highlights = [
           <div class="marquee-group">
             {
               [...brands, ...brands].map(b => (
-                <span class="font-display text-xl font-bold text-gray-400">
-                  {b}
+                <span class="flex h-10 w-24 items-center justify-center sm:h-11 sm:w-28">
+                  <Image
+                    src={b.src}
+                    alt={b.name}
+                    width={200}
+                    loading="eager"
+                    class="max-h-full max-w-full object-contain"
+                  />
                 </span>
               ))
             }
@@ -183,8 +196,14 @@ const highlights = [
           <div class="marquee-group" aria-hidden="true">
             {
               [...brands, ...brands].map(b => (
-                <span class="font-display text-xl font-bold text-gray-400">
-                  {b}
+                <span class="flex h-10 w-24 items-center justify-center sm:h-11 sm:w-28">
+                  <Image
+                    src={b.src}
+                    alt=""
+                    width={200}
+                    loading="eager"
+                    class="max-h-full max-w-full object-contain"
+                  />
                 </span>
               ))
             }

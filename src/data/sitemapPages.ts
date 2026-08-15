@@ -5,6 +5,7 @@ export const INDEXABLE_PATHS = [
   '/',
   '/services/',
   '/products/',
+  '/review/',
   '/contact/',
 ] as const;
 

@@ -235,6 +235,13 @@ html {
   text-size-adjust: 100%;
 }
 
+/* Kill the gray tap-highlight flash on iOS/Android WebViews so buttons and
+   links feel native — our own :active/hover states already provide feedback. */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Display headline treatment */
 .font-display {
   font-family: var(--font-display);

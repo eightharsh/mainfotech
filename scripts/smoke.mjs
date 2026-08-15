@@ -3,7 +3,14 @@ import { readFile } from 'node:fs/promises';
 import { join, extname } from 'node:path';
 
 const DIST = new URL('../.vercel/output/static/', import.meta.url).pathname;
-const ROUTES = ['/', '/services/', '/products/', '/contact/', '/404'];
+const ROUTES = [
+  '/',
+  '/services/',
+  '/products/',
+  '/review/',
+  '/contact/',
+  '/404',
+];
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
